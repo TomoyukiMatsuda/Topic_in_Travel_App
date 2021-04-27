@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import { Main } from 'src/components/Main'
 import styles from 'src/styles/Home.module.css'
+
 
 export default function Home() {
   return (
@@ -13,6 +15,8 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <Main />
 
         <p className={styles.description}>
           Get started by editing{' '}
