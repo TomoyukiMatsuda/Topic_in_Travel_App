@@ -1,8 +1,9 @@
 import { useState } from "react";
+import Head from "next/head";
 
 export const Main = () => {
-  const [topic, setTopic] = useState("何を話すねん");
-  const [member, setMember] = useState("誰がやねん");
+  const [topic, setTopic] = useState("なにをやねん");
+  const [member, setMember] = useState("だれがやねん");
 
   // TODO: 話題を充実させる
   const topics: Array<string> = [
@@ -36,14 +37,24 @@ export const Main = () => {
   };
 
   return (
-    <div>
-      <p className="text-4xl m-5">{member}</p>
-      <p className="text-4xl m-5">{topic}</p>
+    <div className="mt-5 justify-center flex flex-col">
+      {/* TODO: レイアウトをきれいにする + レスポンシブデザインを適用する */}
+      <Head>
+        <title>たのしくいきたい</title>
+      </Head>
+
+      <p className="text-xl m-5 max-w-lg">
+        {member === "だれがやねん" ? member : `だれ？：${member}`}
+      </p>
+      <p className="text-xl m-5 max-w-lg">
+        {topic === "なにをやねん" ? topic : `なに？：${topic}`}
+      </p>
+
       <button
-        className="text-4xl border-2 rounded-lg border-blue-500 background p-1 m-5"
+        className="text-white text-4xl font-semibold shadow-2xl rounded-full bg-blue-400 p-2 m-5 hover:bg-blue-300 active:shadow-none max-w-lg"
         onClick={onClickShuffle}
       >
-        トピックシャッフル
+        ぷっしゅ〜
       </button>
     </div>
   );
