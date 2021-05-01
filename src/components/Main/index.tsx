@@ -34,11 +34,26 @@ export const Main = () => {
     "今の生活の中での一番の楽しみ",
     "昔学校で流行った遊び",
     "大学時代に戻ったらやりたいこと",
-    "",
+    "職場にいるおもろい人",
+    "最近感じた青春",
+    "自分の中での流行語",
+    "最近自分「天才か!」と感じたこと",
+    "自分の好きなところ",
+    "もう一度新卒就活するとしたらどこにいく？",
+    "自由に職業選べるとしたらなにやる",
+    "自分に子供ができたらなにになって欲しい？",
+    "何か新しく始めたいことは？",
+    "無人島に持っていくもの１つ",
   ];
 
   // TODO: 名前をもっとおもろくする
-  const members: Array<string> = ["池氏", "松本くん", "小池(♀)", "山田", "MT"];
+  const members: Array<string> = [
+    "池氏",
+    "松本くん",
+    "小池（♀）",
+    "山田",
+    "まつにい",
+  ];
 
   const onClickShuffle = () => {
     // シャッフルされた話題を表示させる
@@ -56,15 +71,15 @@ export const Main = () => {
         <title>たのしくいきたい</title>
       </Head>
 
-      <p className="text-xl m-5 max-w-lg">
+      <p className="text-xl font-bold font-mono m-5 max-w-lg mt-12">
         {member === "だれがやねん" ? member : `だれ？：${member}`}
       </p>
-      <p className="text-xl m-5 max-w-lg">
+      <p className="text-xl font-bold  font-mono m-5 max-w-lg mb-5">
         {topic === "なにをやねん" ? topic : `なに？：${topic}`}
       </p>
 
       <button
-        className="text-white text-4xl font-semibold shadow-2xl rounded-full bg-blue-400 p-2 m-5 hover:bg-blue-300 active:shadow-none max-w-lg"
+        className="text-white text-4xl font-semibold shadow-2xl rounded-full bg-blue-400 p-2 m-5 hover:bg-blue-300 active:shadow-none mt-11"
         onClick={onClickShuffle}
       >
         ぷっしゅ〜
