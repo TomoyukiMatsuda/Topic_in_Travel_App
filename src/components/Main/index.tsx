@@ -18,7 +18,7 @@ export const Main = () => {
     "人生で最も乗っていたときの話",
     "無人島に持っていくもの３つ",
     "もう一度人生をやるとしたらなにになる？",
-    "50歳のときにどうなって",
+    "50歳のときにどうなっていたい？",
     "人生最大の失敗",
     "最後に泣いたのは？",
     "１年前の今頃なにしてた？",
@@ -37,7 +37,7 @@ export const Main = () => {
     "職場にいるおもろい人",
     "最近感じた青春",
     "自分の中での流行語",
-    "最近自分「天才か!」と感じたこと",
+    "最近「自分天才か!」と感じたこと",
     "自分の好きなところ",
     "もう一度新卒就活するとしたらどこにいく？",
     "自由に職業選べるとしたらなにやる",
@@ -51,7 +51,7 @@ export const Main = () => {
     "池氏",
     "松本くん",
     "小池（♀）",
-    "山田",
+    "ゆめち",
     "まつにい",
   ];
 
@@ -66,7 +66,7 @@ export const Main = () => {
 
   return (
     <div className="mt-5 justify-center flex flex-col">
-      {/* TODO: レイアウトをきれいにする + レスポンシブデザインを適用する */}
+      {/* TODO: レイアウトをきれいにする */}
       <Head>
         <title>たのしくいきたい</title>
       </Head>
@@ -82,7 +82,7 @@ export const Main = () => {
         className="text-white text-4xl font-semibold shadow-2xl rounded-full bg-blue-400 p-2 m-5 hover:bg-blue-300 active:shadow-none mt-11"
         onClick={onClickShuffle}
       >
-        ぷっしゅ〜
+        ぷっしゅ
       </button>
     </div>
   );
