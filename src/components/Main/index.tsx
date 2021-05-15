@@ -47,13 +47,16 @@ export const Main = () => {
   ];
 
   // TODO: 名前をもっとおもろくする
-  const members: Array<string> = [
-    "池氏",
-    "松本くん",
-    "小池（♀）",
-    "ゆめち",
-    "まつにい",
-  ];
+  // 小池たちバージョン
+  // const members: Array<string> = [
+  //   "池氏",
+  //   "松本くん",
+  //   "小池（♀）",
+  //   "ゆめち",
+  //   "まつにい",
+  // ];
+
+  const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
 
   const onClickShuffle = () => {
     // シャッフルされた話題を表示させる
