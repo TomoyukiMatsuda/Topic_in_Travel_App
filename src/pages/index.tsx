@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Main } from "src/components/Main";
-import { Sub } from "src/components/Sub";
+//import { Sub } from "src/components/Sub";
 
 export default function Home() {
   return (
@@ -11,7 +11,6 @@ export default function Home() {
       </Head>
 
       <Main />
-      <Sub />
     </div>
   );
 }
