@@ -46,17 +46,17 @@ export const Main = () => {
     "無人島に持っていくもの１つ",
   ];
 
-  // TODO: 名前をもっとおもろくする
   // 小池たちバージョン
-  // const members: Array<string> = [
-  //   "池氏",
-  //   "松本くん",
-  //   "小池（♀）",
-  //   "ゆめち",
-  //   "まつにい",
-  // ];
+  const members: Array<string> = [
+    "池氏",
+    "松本くん",
+    "小池（♀）",
+    "ゆめち",
+    "まつにい",
+  ];
 
-  const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
+  // キャンプメンツ
+  // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
 
   const onClickShuffle = () => {
     // シャッフルされた話題を表示させる
