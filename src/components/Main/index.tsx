@@ -47,16 +47,19 @@ export const Main = () => {
   ];
 
   // 小池たちバージョン
-  const members: Array<string> = [
-    "池氏",
-    "松本くん",
-    "小池（♀）",
-    "ゆめち",
-    "まつにい",
-  ];
+  // const members: Array<string> = [
+  //   "池氏",
+  //   "松本くん",
+  //   "小池（♀）",
+  //   "ゆめち",
+  //   "まつにい",
+  // ];
 
   // キャンプメンツ
   // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
+
+  // もろ、じゅんご
+  const members: Array<string> = ["じゅんごマン", "もろ", "まつにい"];
 
   const onClickShuffle = () => {
     // シャッフルされた話題を表示させる
@@ -71,7 +74,7 @@ export const Main = () => {
     <div className="mt-5 justify-center flex flex-col">
       {/* TODO: レイアウトをきれいにする */}
       <Head>
-        <title>たのしくいきたい</title>
+        <title>とぴっかー</title>
       </Head>
 
       <p className="text-xl font-bold font-mono m-5 max-w-lg mt-12">
