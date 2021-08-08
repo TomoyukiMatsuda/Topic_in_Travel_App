@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Head from "next/head";
 
 export const Main = () => {
@@ -100,14 +100,14 @@ export const Main = () => {
   // キャンプメンツ
   // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
 
-  const onClickShuffle = () => {
+  const onClickShuffle = useCallback(() => {
     // シャッフルされた話題を表示させる
     let topicNum = Math.floor(Math.random() * topics.length);
     let memberNum = Math.floor(Math.random() * members.length);
 
     setTopic(topics[topicNum]);
     setMember(members[memberNum]);
-  };
+  }, [topics, members]);
 
   return (
     <div className="mt-5 justify-center flex flex-col">
@@ -123,6 +123,7 @@ export const Main = () => {
         {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
       </p>
 
+      <br />
       <button
         className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-11"
         onClick={onClickShuffle}
