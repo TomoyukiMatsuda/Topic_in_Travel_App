@@ -130,6 +130,10 @@ export const Main = () => {
       >
         ぷっしゅ
       </button>
+      {q36.map((q) => {
+          <p>{q}</p>
+        })
+      }
     </div>
   );
 };
