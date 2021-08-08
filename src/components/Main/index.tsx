@@ -46,14 +46,21 @@ export const Main = () => {
     "無人島に持っていくもの１つ",
   ];
 
-  // 小池たちバージョン
+  // 山岸、竹下くんバージョン
   const members: Array<string> = [
-    "池氏",
-    "松本くん",
-    "小池（♀）",
-    "ゆめち",
-    "まつにい",
+    "まつだ氏",
+    "こーきくん",
+    "やまぎしパイセン"
   ];
+
+  // 小池たちバージョン
+  // const members: Array<string> = [
+  //   "池氏",
+  //   "松本くん",
+  //   "小池（♀）",
+  //   "ゆめち",
+  //   "まつにい",
+  // ];
 
   // キャンプメンツ
   // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
@@ -74,15 +81,15 @@ export const Main = () => {
         <title>たのしくいきたい</title>
       </Head>
 
-      <p className="text-xl font-bold font-mono m-5 max-w-lg mt-12">
-        {member === "だれがやねん" ? member : `だれ？：${member}`}
+      <p className="text-gray-600 text-xl font-bold font-mono m-5 max-w-lg mt-12">
+        {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
       </p>
-      <p className="text-xl font-bold  font-mono m-5 max-w-lg mb-5">
-        {topic === "なにをやねん" ? topic : `なに？：${topic}`}
+      <p className="text-gray-600 text-xl font-bold  font-mono m-5 max-w-lg mb-5">
+        {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
       </p>
 
       <button
-        className="text-white text-4xl font-semibold shadow-2xl rounded-full bg-blue-400 p-2 m-5 hover:bg-blue-300 active:shadow-none mt-11"
+        className="font-bold text-lg bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-11"
         onClick={onClickShuffle}
       >
         ぷっしゅ
