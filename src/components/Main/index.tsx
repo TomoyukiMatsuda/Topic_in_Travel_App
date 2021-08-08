@@ -47,11 +47,7 @@ export const Main = () => {
   ];
 
   // 山岸、竹下くんバージョン
-  const members: Array<string> = [
-    "まつだ氏",
-    "こーきくん",
-    "やまぎしパイセン"
-  ];
+  const members: Array<string> = ["まつだ氏", "こーきくん", "やまぎしパイセン"];
 
   // 小池たちバージョン
   // const members: Array<string> = [
@@ -78,18 +74,18 @@ export const Main = () => {
     <div className="mt-5 justify-center flex flex-col">
       {/* TODO: レイアウトをきれいにする */}
       <Head>
-        <title>たのしくいきたい</title>
+        <title>トピっくる</title>
       </Head>
 
-      <p className="text-gray-600 text-xl font-bold font-mono m-5 max-w-lg mt-12">
+      <p className="text-gray-600 text-2xl font-bold font-mono m-5 max-w-lg mt-12">
         {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
       </p>
-      <p className="text-gray-600 text-xl font-bold  font-mono m-5 max-w-lg mb-5">
+      <p className="text-gray-600 text-2xl font-bold  font-mono m-5 max-w-lg mb-5">
         {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
       </p>
 
       <button
-        className="font-bold text-lg bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-11"
+        className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-11"
         onClick={onClickShuffle}
       >
         ぷっしゅ
