@@ -136,20 +136,19 @@ export const Main = () => {
         <title>{isDefault ? "フツーの" : "36の質問"}</title>
       </Head>
 
-      <h2 className="text-blue-400 font-bold text-2xl font-mono m-5 max-w-lg mt-12 text-center">
+      <h2 className="text-blue-400 font-bold text-2xl font-mono m-5 mt-3 max-w-lg text-center">
         {isDefault ? "フツーの話題" : "36の質問"}
       </h2>
 
-      <p className="text-gray-600 text-xl font-bold font-mono m-5 max-w-lg mt-12">
+      <p className="text-gray-600 text-xl font-bold font-mono border- mx-5 max-w-lg">
         {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
       </p>
-      <p className="text-gray-600 text-xl font-bold  font-mono m-5 max-w-lg mb-2">
+      <p className="text-gray-600 text-xl font-bold  font-mono m-5 max-w-lg">
         {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
       </p>
 
-      <br />
       <button
-        className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-2"
+        className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-1"
         onClick={onClickShuffle}
       >
         ぷっしゅ
