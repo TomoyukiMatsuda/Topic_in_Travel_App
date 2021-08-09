@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Head from "next/head";
 
 export const Main = () => {
@@ -101,6 +101,12 @@ export const Main = () => {
   // キャンプメンツ
   // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
 
+  // 話題切り替え時に表示を初期化
+  useEffect(() => {
+    setTopic("なにをやねん");
+    setMember("だれがやねん");
+  }, [isDefault]);
+
   const onClickShuffle = useCallback(() => {
     // シャッフルされた話題を表示させる
     if (isDefault) {
@@ -124,6 +130,10 @@ export const Main = () => {
       <Head>
         <title>{isDefault ? "フツーの" : "36の質問"}</title>
       </Head>
+      {/* todo 話題ラベル
+      <h2 className="text-yellow-600 text-4xl font-bold font-mono m-5 max-w-lg mt-12 text-center">*/}
+      {/*  {isDefault ? "フツーの話題" : "36の質問"}*/}
+      {/*</h2>*/}
 
       <p className="text-gray-600 text-2xl font-bold font-mono m-5 max-w-lg mt-12">
         {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
