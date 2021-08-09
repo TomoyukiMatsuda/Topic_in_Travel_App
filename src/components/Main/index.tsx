@@ -4,6 +4,7 @@ import Head from "next/head";
 export const Main = () => {
   const [topic, setTopic] = useState("なにをやねん");
   const [member, setMember] = useState("だれがやねん");
+  const [isTopics, setIsTopics] = useState(true);
 
   // todo 話題の切り替え機能
   const topics: Array<string> = [
@@ -86,7 +87,7 @@ export const Main = () => {
   ];
 
   // 山岸、竹下くんバージョン
-  const members: Array<string> = ["まつだ氏", "こーきくん", "やまぎしパイセン"];
+  const members: Array<string> = ["まつだ氏", "こーきくん", "やまぎしパイセン", "アリサさん"];
 
   // 小池たちバージョン
   // const members: Array<string> = [
@@ -102,18 +103,26 @@ export const Main = () => {
 
   const onClickShuffle = useCallback(() => {
     // シャッフルされた話題を表示させる
-    let topicNum = Math.floor(Math.random() * topics.length);
-    let memberNum = Math.floor(Math.random() * members.length);
+    if (isTopics) {
+      shuffleTopics(topics);
+    } else {
+      shuffleTopics(q36);
+    }
 
-    setTopic(topics[topicNum]);
+    let memberNum = Math.floor(Math.random() * members.length);
     setMember(members[memberNum]);
-  }, [topics, members]);
+  }, [topics, q36, members]);
+
+  const shuffleTopics = (topics: Array<string>) => {
+    let topicNum = Math.floor(Math.random() * topics.length);
+    setTopic(topics[topicNum]);
+  }
 
   return (
     <div className="mt-5 justify-center flex flex-col">
       {/* TODO: レイアウトをきれいにする */}
       <Head>
-        <title>トピっくる</title>
+        <title>{isTopics ? "フツーの" : "36の質問"}</title>
       </Head>
 
       <p className="text-gray-600 text-2xl font-bold font-mono m-5 max-w-lg mt-12">
@@ -130,10 +139,12 @@ export const Main = () => {
       >
         ぷっしゅ
       </button>
-      {q36.map((q) => {
-          <p>{q}</p>
-        })
-      }
+      <button
+        className="font-bold text-2xl bg-yellow-500 hover:bg-yellow-300 py-2 px-4 rounded-xl text-white m-5 mt-11"
+        onClick={() => setIsTopics(!isTopics)}
+      >
+        トピックを変える
+      </button>
     </div>
   );
 };
