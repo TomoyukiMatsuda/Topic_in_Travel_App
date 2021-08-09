@@ -1,52 +1,5 @@
-import { useCallback, useState } from "react";
-import Head from "next/head";
-
-export const Main = () => {
-  const [topic, setTopic] = useState("なにをやねん");
-  const [member, setMember] = useState("だれがやねん");
-  const [isTopics, setIsTopics] = useState(true);
-
-  // todo 話題の切り替え機能
-  const topics: Array<string> = [
-    "最近あった面白いこと",
-    "最近ハッピーだったこと",
-    "最近失敗したこと",
-    "１ヶ月の休みが会ったらなにする？",
-    "１億円あったらどうする？",
-    "休日はどう過ごしている？",
-    "こういう人は許せない",
-    "朝起きて最初にすること",
-    "人生で最も乗っていたときの話",
-    "無人島に持っていくもの３つ",
-    "もう一度人生をやるとしたらなにになる？",
-    "50歳のときにどうなっていたい？",
-    "人生最大の失敗",
-    "最後に泣いたのは？",
-    "１年前の今頃なにしてた？",
-    "５年前の今頃なにしてた？",
-    "３年前の今頃なにしてた？",
-    "なぞに覚えている一番小さい頃の思い出",
-    "小さい頃の夢",
-    "最近買った高価なもの",
-    "子供に付けたい名前",
-    "すべらない話",
-    "今ハマっていること",
-    "永遠の何歳でいたい？",
-    "今の生活の中での一番の楽しみ",
-    "昔学校で流行った遊び",
-    "大学時代に戻ったらやりたいこと",
-    "職場にいるおもろい人",
-    "最近感じた青春",
-    "自分の中での流行語",
-    "最近「自分天才か!」と感じたこと",
-    "自分の好きなところ",
-    "もう一度新卒就活するとしたらどこにいく？",
-    "自由に職業選べるとしたらなにやる",
-    "自分に子供ができたらなにになって欲しい？",
-    "何か新しく始めたいことは？",
-    "無人島に持っていくもの１つ",
-  ];
-
+// 話題一覧画面コンポーネント;
+export const Topics = () => {
   const q36: Array<string> = [
     "この世界の誰でもディナーに呼べるとしたら、誰を招待しますか？",
     "有名になりたいですか？　どんな方法で？",
@@ -86,65 +39,15 @@ export const Main = () => {
     "個人的な問題を打ち明けて、相手からアドバイスを受けて下さい。また、その問題を抱えるあなたがどんな気持ちでいるのか、相手に想像・描写してもらって下さい。",
   ];
 
-  // 山岸、竹下くんバージョン
-  const members: Array<string> = ["まつだ氏", "こーきくん", "やまぎしパイセン", "アリサさん"];
-
-  // 小池たちバージョン
-  // const members: Array<string> = [
-  //   "池氏",
-  //   "松本くん",
-  //   "小池（♀）",
-  //   "ゆめち",
-  //   "まつにい",
-  // ];
-
-  // キャンプメンツ
-  // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
-
-  const onClickShuffle = useCallback(() => {
-    // シャッフルされた話題を表示させる
-    if (isTopics) {
-      shuffleTopics(topics);
-    } else {
-      shuffleTopics(q36);
-    }
-
-    let memberNum = Math.floor(Math.random() * members.length);
-    setMember(members[memberNum]);
-  }, [topics, q36, members]);
-
-  const shuffleTopics = (topics: Array<string>) => {
-    let topicNum = Math.floor(Math.random() * topics.length);
-    setTopic(topics[topicNum]);
-  }
-
   return (
-    <div className="mt-5 justify-center flex flex-col">
-      {/* TODO: レイアウトをきれいにする */}
-      <Head>
-        <title>{isTopics ? "フツーの" : "36の質問"}</title>
-      </Head>
-
-      <p className="text-gray-600 text-2xl font-bold font-mono m-5 max-w-lg mt-12">
-        {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
-      </p>
-      <p className="text-gray-600 text-2xl font-bold  font-mono m-5 max-w-lg mb-5">
-        {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
-      </p>
-
-      <br />
-      <button
-        className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-11"
-        onClick={onClickShuffle}
-      >
-        ぷっしゅ
-      </button>
-      <button
-        className="font-bold text-2xl bg-yellow-500 hover:bg-yellow-300 py-2 px-4 rounded-xl text-white m-5 mt-11"
-        onClick={() => setIsTopics(!isTopics)}
-      >
-        トピックを変える
-      </button>
+    <div>
+      <p>トピック一覧</p>
+      {/*なぜか番号が表示されない*/}
+      <ol>
+        {q36.map((q) => {
+          return <li key={q}>{q}</li>;
+        })}
+      </ol>
     </div>
   );
-};
+}
