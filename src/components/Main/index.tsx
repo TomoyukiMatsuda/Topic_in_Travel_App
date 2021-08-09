@@ -4,10 +4,10 @@ import Head from "next/head";
 export const Main = () => {
   const [topic, setTopic] = useState("なにをやねん");
   const [member, setMember] = useState("だれがやねん");
-  const [isTopics, setIsTopics] = useState(true);
+  const [isDefault, setIsDefault] = useState(true);
 
   // todo 話題の切り替え機能
-  const topics: Array<string> = [
+  const defaultTopics: Array<string> = [
     "最近あった面白いこと",
     "最近ハッピーだったこと",
     "最近失敗したこと",
@@ -103,15 +103,15 @@ export const Main = () => {
 
   const onClickShuffle = useCallback(() => {
     // シャッフルされた話題を表示させる
-    if (isTopics) {
-      shuffleTopics(topics);
+    if (isDefault) {
+      shuffleTopics(defaultTopics);
     } else {
       shuffleTopics(q36);
     }
 
     let memberNum = Math.floor(Math.random() * members.length);
     setMember(members[memberNum]);
-  }, [topics, q36, members]);
+  }, [defaultTopics, q36, members]);
 
   const shuffleTopics = (topics: Array<string>) => {
     let topicNum = Math.floor(Math.random() * topics.length);
@@ -122,7 +122,7 @@ export const Main = () => {
     <div className="mt-5 justify-center flex flex-col">
       {/* TODO: レイアウトをきれいにする */}
       <Head>
-        <title>{isTopics ? "フツーの" : "36の質問"}</title>
+        <title>{isDefault ? "フツーの" : "36の質問"}</title>
       </Head>
 
       <p className="text-gray-600 text-2xl font-bold font-mono m-5 max-w-lg mt-12">
@@ -141,7 +141,7 @@ export const Main = () => {
       </button>
       <button
         className="font-bold text-2xl bg-yellow-500 hover:bg-yellow-300 py-2 px-4 rounded-xl text-white m-5 mt-11"
-        onClick={() => setIsTopics(!isTopics)}
+        onClick={() => setIsDefault(!isDefault)}
       >
         トピックを変える
       </button>
