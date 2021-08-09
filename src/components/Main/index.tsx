@@ -87,7 +87,12 @@ export const Main = () => {
   ];
 
   // 山岸、竹下くんバージョン
-  const members: Array<string> = ["まつだ氏", "こーきくん", "やまぎしパイセン", "アリサさん"];
+  const members: Array<string> = [
+    "まつだ氏",
+    "こーきくん",
+    "やまぎしパイセン",
+    "アリサさん",
+  ];
 
   // 小池たちバージョン
   // const members: Array<string> = [
@@ -122,7 +127,7 @@ export const Main = () => {
   const shuffleTopics = (topics: Array<string>) => {
     let topicNum = Math.floor(Math.random() * topics.length);
     setTopic(topics[topicNum]);
-  }
+  };
 
   return (
     <div className="mt-5 justify-center flex flex-col">
@@ -130,27 +135,27 @@ export const Main = () => {
       <Head>
         <title>{isDefault ? "フツーの" : "36の質問"}</title>
       </Head>
-      {/* todo 話題ラベル
-      <h2 className="text-yellow-600 text-4xl font-bold font-mono m-5 max-w-lg mt-12 text-center">*/}
-      {/*  {isDefault ? "フツーの話題" : "36の質問"}*/}
-      {/*</h2>*/}
 
-      <p className="text-gray-600 text-2xl font-bold font-mono m-5 max-w-lg mt-12">
+      <h2 className="text-blue-400 font-bold text-2xl font-mono m-5 max-w-lg mt-12 text-center">
+        {isDefault ? "フツーの話題" : "36の質問"}
+      </h2>
+
+      <p className="text-gray-600 text-xl font-bold font-mono m-5 max-w-lg mt-12">
         {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
       </p>
-      <p className="text-gray-600 text-2xl font-bold  font-mono m-5 max-w-lg mb-5">
+      <p className="text-gray-600 text-xl font-bold  font-mono m-5 max-w-lg mb-2">
         {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
       </p>
 
       <br />
       <button
-        className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-11"
+        className="font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 m-5 mt-2"
         onClick={onClickShuffle}
       >
         ぷっしゅ
       </button>
       <button
-        className="font-bold text-2xl bg-yellow-500 hover:bg-yellow-300 py-2 px-4 rounded-xl text-white m-5 mt-11"
+        className="font-bold text-2xl bg-yellow-500 hover:bg-yellow-300 py-2 px-4 rounded-xl text-white m-5 mt-0"
         onClick={() => setIsDefault(!isDefault)}
       >
         トピックを変える
