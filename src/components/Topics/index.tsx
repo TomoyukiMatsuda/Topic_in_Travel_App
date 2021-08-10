@@ -42,7 +42,7 @@ export const Topics = () => {
   return (
     <div>
       <p>トピック一覧</p>
-      {/*なぜか番号が表示されない*/}
+      {/* todo なぜか番号が表示されないので表示 */}
       <ol>
         {q36.map((q) => {
           return <li key={q}>{q}</li>;
@@ -50,4 +50,4 @@ export const Topics = () => {
       </ol>
     </div>
   );
-}
+};
