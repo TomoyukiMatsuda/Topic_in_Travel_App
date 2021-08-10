@@ -1,5 +1,6 @@
 // 話題一覧画面コンポーネント;
 export const Topics = () => {
+  // todo firestore からデータを取得してそのデータを表示させたい
   const q36: Array<string> = [
     "この世界の誰でもディナーに呼べるとしたら、誰を招待しますか？",
     "有名になりたいですか？　どんな方法で？",
@@ -41,8 +42,7 @@ export const Topics = () => {
 
   return (
     <div>
-      <p>トピック一覧</p>
-      {/* todo なぜか番号が表示されないので表示 */}
+      {/* todo なぜか番号が表示されないので表示したい */}
       <ol>
         {q36.map((q) => {
           return <li key={q}>{q}</li>;
