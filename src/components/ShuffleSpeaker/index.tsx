@@ -1,8 +1,10 @@
-import { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Head from "next/head";
 
-export const Main = () => {
+// 話題を話す人があるコンポーネント
+export const ShuffleSpeaker: React.VFC = () => {
   const [topic, setTopic] = useState("なにをやねん");
+  const [member, setMember] = useState("だれがやねん");
   const [isDefault, setIsDefault] = useState(true);
 
   // todo 話題の切り替え機能
@@ -108,6 +110,7 @@ export const Main = () => {
   // 話題切り替え時に表示を初期化
   useEffect(() => {
     setTopic("なにをやねん");
+    setMember("だれがやねん");
   }, [isDefault]);
 
   const onClickShuffle = useCallback(() => {
@@ -117,7 +120,10 @@ export const Main = () => {
     } else {
       shuffleTopics(q36);
     }
-  }, [defaultTopics, q36]);
+
+    let memberNum = Math.floor(Math.random() * members.length);
+    setMember(members[memberNum]);
+  }, [defaultTopics, q36, members]);
 
   const shuffleTopics = (topics: Array<string>) => {
     let topicNum = Math.floor(Math.random() * topics.length);
@@ -135,6 +141,9 @@ export const Main = () => {
         {isDefault ? "フツーの話題" : "36の質問"}
       </h2>
 
+      <p className="text-gray-600 text-xl font-bold font-mono border- mx-5 max-w-lg">
+        {member === "だれがやねん" ? member : `だれが話す？： ${member}`}
+      </p>
       <p className="text-gray-600 text-xl font-bold  font-mono m-5 max-w-lg">
         {topic === "なにをやねん" ? topic : `なにを？： ${topic}`}
       </p>
