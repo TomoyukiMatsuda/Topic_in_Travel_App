@@ -1,5 +1,7 @@
 // 話題一覧画面コンポーネント;
-export const Topics = () => {
+import React from "react";
+
+export const Topics: React.VFC = () => {
   // todo firestore からデータを取得してそのデータを表示させたい
   const q36: Array<string> = [
     "この世界の誰でもディナーに呼べるとしたら、誰を招待しますか？",
@@ -42,12 +44,11 @@ export const Topics = () => {
 
   return (
     <div>
-      {/* todo なぜか番号が表示されないので表示したい */}
-      <ol>
+      <ul className="px-10">
         {q36.map((q) => {
-          return <li key={q}>{q}</li>;
+          return <li className="my-4 border-b-2" key={q}>{q}</li>;
         })}
-      </ol>
+      </ul>
     </div>
   );
 };
