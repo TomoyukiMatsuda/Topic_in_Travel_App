@@ -4,7 +4,7 @@ import { firebaseDB } from "../../firebase";
 interface Topic {
   id: string;
   topic: string;
-  timestamp: string;
+  timestamp: any;
 }
 
 // 話題一覧画面コンポーネント;
@@ -13,7 +13,7 @@ export const Topics: React.VFC = () => {
     {
       id: "",
       topic: "",
-      timestamp: "",
+      timestamp: null,
     },
   ]);
 

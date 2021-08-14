@@ -2,6 +2,7 @@ import React, { FormEvent, useState, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
 
+// トピック登録フォームのコンポーネント
 export const RegisterTopic: React.VFC = () => {
   // todo: バリデーション設定 / React Hook Form の利用検討
   const [topic, setTopic] = useState<string>();
