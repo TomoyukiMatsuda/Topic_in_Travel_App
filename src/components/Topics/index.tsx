@@ -42,7 +42,7 @@ export const Topics: React.VFC = () => {
         {topics.map((topic) => {
           console.log(topic);
           return (
-            <li className="my-4 border-b-2" key={topic.id}>
+            <li className="my-5 border-b-2" key={topic.id}>
               {topic.topic}
             </li>
           );
