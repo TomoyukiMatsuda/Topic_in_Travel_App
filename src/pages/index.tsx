@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Main } from "src/components/Main";
 import { RegisterTopic } from "../components/RegisterTopic";
-import {ShuffleSpeaker} from "../components/ShuffleSpeaker";
+import { ShuffleSpeaker } from "../components/ShuffleSpeaker";
 
 export default function Home() {
   return (
@@ -9,8 +9,7 @@ export default function Home() {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/*<Main />*/}
-      <RegisterTopic />
+      <Main />
     </div>
   );
 }

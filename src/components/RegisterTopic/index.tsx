@@ -38,6 +38,7 @@ export const RegisterTopic: React.VFC = () => {
         </label>
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="例：職業を好きに選べるとしたら何を選ぶ？"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
         />
