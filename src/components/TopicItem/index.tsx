@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
+import { DeleteOutline } from "@material-ui/icons";
 
 interface Props {
   id: string;
@@ -9,6 +10,7 @@ interface Props {
 export const TopicItem: React.VFC<Props> = memo((props) => {
   // todo 削除前に確認ダイアログ表示させたい
   const deleteTopic = useCallback(() => {
+    // todo ログインしてるかどうか認証機能を挟む
     firebaseDB
       .collection("topics")
       .doc(props.id)
@@ -26,12 +28,13 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
   return (
     <>
       <p>{props.content}</p>
-      <button
-        className="bg-red-500 hover:bg-red-300 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+      {/*todo ログインしてない場合は非表示？*/}
+      <DeleteOutline
+        className="cursor-pointer text-white bg-red-500 hover:bg-red-400"
         onClick={deleteTopic}
       >
         削除
-      </button>
+      </DeleteOutline>
     </>
   );
 });
