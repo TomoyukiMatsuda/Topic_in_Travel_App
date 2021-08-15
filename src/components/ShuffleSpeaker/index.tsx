@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Head from "next/head";
 
+// todo 話す人だけ、シャッフルするコンポーネントを作成
 // 話題を話す人があるコンポーネント
 export const ShuffleSpeaker: React.VFC = () => {
   const [topic, setTopic] = useState("なにをやねん");

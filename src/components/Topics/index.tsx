@@ -3,7 +3,7 @@ import { firebaseDB } from "../../firebase";
 
 interface Topic {
   id: string;
-  topic: string;
+  content: string;
   timestamp: any;
 }
 
@@ -12,7 +12,7 @@ export const Topics: React.VFC = () => {
   const [topics, setTopics] = useState<Array<Topic>>([
     {
       id: "",
-      topic: "",
+      content: "",
       timestamp: null,
     },
   ]);
@@ -26,7 +26,7 @@ export const Topics: React.VFC = () => {
         setTopics(
           snapshot.docs.map<Topic>((doc) => ({
             id: doc.id,
-            topic: doc.data().topic,
+            content: doc.data().topic,
             timestamp: doc.data().timestamp,
           }))
         );
@@ -38,16 +38,17 @@ export const Topics: React.VFC = () => {
 
   return (
     <div>
-      <ul className="px-10">
-        {topics.map((topic) => {
-          console.log(topic);
-          return (
-            <li className="my-5 border-b-2" key={topic.id}>
-              {topic.topic}
-            </li>
-          );
-        })}
-      </ul>
+      {topics[0]?.id && (
+        <div className="px-5">
+          {topics.map((topic) => {
+            return (
+              <div className="my-5 border-b-2" key={topic.id}>
+                {topic.content}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
