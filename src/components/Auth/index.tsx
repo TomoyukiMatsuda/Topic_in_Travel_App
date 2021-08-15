@@ -15,6 +15,17 @@ export const Auth: React.VFC = () => {
       });
   }, [firebaseAuth, firebaseGoogleAuthProvider]);
 
+  const signOutGoogle = useCallback(async () => {
+    await firebaseAuth
+      .signOut()
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <button
@@ -23,6 +34,15 @@ export const Auth: React.VFC = () => {
       >
         Googleログイン
       </button>
+      <button
+        className="bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        onClick={signOutGoogle}
+      >
+        ログアウト
+      </button>
+      {firebaseAuth.currentUser && (
+        <p>{firebaseAuth.currentUser?.displayName} でログインしてる</p>
+      )}
     </>
   );
 };
