@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { firebaseDB } from "../../firebase";
+import { TopicItem } from "../TopicItem";
 
 interface Topic {
   id: string;
@@ -42,8 +43,11 @@ export const Topics: React.VFC = () => {
         <div className="px-5">
           {topics.map((topic) => {
             return (
-              <div className="my-5 border-b-2" key={topic.id}>
-                {topic.content}
+              <div
+                className="flex justify-between my-5 border-b-2"
+                key={topic.id}
+              >
+                <TopicItem id={topic.id} content={topic.content} />
               </div>
             );
           })}
