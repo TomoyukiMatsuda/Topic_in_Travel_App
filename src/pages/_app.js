@@ -1,13 +1,14 @@
 import "tailwindcss/tailwind.css";
-import React, { useEffect, useReducer } from "react";
-import { firebaseAuth } from "../firebase";
+import React, { useEffect, useReducer, createContext } from "react";
+import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 
 const initialState = {};
 
+// todo 型定義
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
-      return action.payload.user;
+      return action.payload.authUser;
     case "logout":
       return initialState;
     default:
@@ -15,35 +16,23 @@ const reducer = (state, action) => {
   }
 };
 
-const AuthContext = React.createContext({});
+// todo firebase から currentuser 取得できてるので、Context 不要？？
+export const AuthUserContext = createContext({});
 
 function MyApp({ Component, pageProps }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     // Firebase のログインユーザー情報の変更を監視
-    const unSubscription = firebaseAuth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        // todo ログインユーザーを保持する処理
-        dispatch({
-          type: "login",
-          payload: {
-            authUser,
-          },
-        });
-      } else {
-        // todo ログアウト　ユーザー情報をからにする処理
-        dispatch({ type: "logout" });
-      }
-    });
+    const unSubscription = useListenAuthUserState(dispatch);
 
     return () => unSubscription();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <AuthContext.Provider value={state}>
+    <AuthUserContext.Provider value={{ state, dispatch }}>
       <Component {...pageProps} />
-    </AuthContext.Provider>
+    </AuthUserContext.Provider>
   );
 }
 

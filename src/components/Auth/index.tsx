@@ -19,6 +19,7 @@ export const Auth: React.VFC = () => {
     await firebaseAuth
       .signOut()
       .then(() => {
+        // todo これいる？
         window.location.reload();
       })
       .catch((error) => {
@@ -40,6 +41,7 @@ export const Auth: React.VFC = () => {
       >
         ログアウト
       </button>
+      {/* todo useContext 使ってログイン状態を取得したい気がする */}
       {firebaseAuth.currentUser && (
         <p>{firebaseAuth.currentUser?.displayName} でログインしてる</p>
       )}
