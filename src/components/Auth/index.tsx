@@ -11,7 +11,7 @@ export const Auth: React.VFC = () => {
       })
       .catch((error) => {
         // todo エラー処理（アラート？）
-        console.log(error);
+        alert(error.message);
       });
   }, [firebaseAuth, firebaseGoogleAuthProvider]);
 
@@ -23,7 +23,7 @@ export const Auth: React.VFC = () => {
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   }, []);
 
