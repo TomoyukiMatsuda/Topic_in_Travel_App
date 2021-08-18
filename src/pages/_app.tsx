@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
 import React, { useEffect, useReducer, createContext } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
+import { AppProps } from "next/app";
 
 const initialState = {};
 
@@ -19,7 +20,7 @@ const reducer = (state, action) => {
 // todo firebase から currentuser 取得できてるので、Context 不要？？
 export const AuthUserContext = createContext({});
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }: AppProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -36,4 +37,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default App;
