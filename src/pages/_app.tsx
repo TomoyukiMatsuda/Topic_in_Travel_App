@@ -45,7 +45,7 @@ function App({ Component, pageProps }: AppProps) {
   }, [dispatch]);
 
   return (
-    <AuthUserContext.Provider value={{ state, dispatch }}>
+    <AuthUserContext.Provider value={{ state }}>
       <Component {...pageProps} />
     </AuthUserContext.Provider>
   );
