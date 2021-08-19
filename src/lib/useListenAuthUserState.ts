@@ -11,12 +11,21 @@ export const useListenAuthUserState = (
       dispatch({
         type: "login",
         payload: {
-          user,
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
         },
       });
     } else {
       // todo ログアウト　ユーザー情報をからにする処理
-      dispatch({ type: "logout" });
+      dispatch({
+        type: "logout",
+        payload: {
+          id: "",
+          name: "",
+          email: "",
+        },
+      });
     }
   });
 };
