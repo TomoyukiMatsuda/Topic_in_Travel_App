@@ -1,15 +1,25 @@
-import React, { FormEvent, useState, useCallback } from "react";
+import React, { FormEvent, useState, useCallback, useContext } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
+import { AuthUser, AuthUserContext } from "../../pages/_app";
 
 // トピック登録フォームのコンポーネント
 export const RegisterTopic: React.VFC = () => {
-  // todo: バリデーション設定 / React Hook Form の利用検討
+  // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const [topic, setTopic] = useState<string>();
+  const authUser: AuthUser = useContext(AuthUserContext);
 
   const createTopic = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      console.log(authUser);
+      if (authUser.id === "") {
+        // ログインしてなければトピック登録できない todo エラーメッセージ
+        console.log("ログインしてないから登録できないで！！");
+        return;
+      }
+
+      console.log("ログインしてるから登録できるで！！");
       firebaseDB
         .collection("topics")
         .add({
@@ -42,6 +52,7 @@ export const RegisterTopic: React.VFC = () => {
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
         />
+        {/*フォーム入力有無でボタンの色変えたい*/}
         <button
           className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"

@@ -14,14 +14,12 @@ export default function TopicsPage() {
         トピック一覧
       </h1>
       <Auth />
-      {/*ログインしていなければ表示*/}
+      {/* ログインしていなければ非表示（トピック登録できない） */}
       {authUser.id !== "" && (
         <div className="pb-4">
           <RegisterTopic />
         </div>
       )}
-      {/* todo ログイン時に、トピックの登録 と トピックの削除（Topicコンポーネント） 可能にする*/}
-
       <Topics />
     </div>
   );
