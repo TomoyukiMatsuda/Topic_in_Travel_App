@@ -7,12 +7,13 @@ export default function TopicsPage() {
   return (
     <div>
       <h1 className="text-xl text-center mt-5 font-bold text-blue-500">
-        新規トピック登録ページ
+        トピック一覧
       </h1>
-      <Auth />
-      <div className="pb-4">
-        <RegisterTopic />
-      </div>
+      {/* todo ログイン時に、トピックの登録 と トピックの削除（Topicコンポーネント） 可能にする
+      <Auth />*/}
+      {/*<div className="pb-4">*/}
+      {/*  <RegisterTopic />*/}
+      {/*</div>*/}
       <Topics />
     </div>
   );
