@@ -5,13 +5,13 @@ import { firebaseAuth } from "../firebase";
 export const useListenAuthUserState = (
   dispatch: Dispatch<SetStateAction<any>>
 ) => {
-  return firebaseAuth.onAuthStateChanged((authUser) => {
-    if (authUser) {
+  return firebaseAuth.onAuthStateChanged((user) => {
+    if (user) {
       // todo ログインユーザーを保持する処理
       dispatch({
         type: "login",
         payload: {
-          authUser,
+          user,
         },
       });
     } else {

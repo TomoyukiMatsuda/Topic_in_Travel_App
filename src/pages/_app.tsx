@@ -1,15 +1,29 @@
 import "tailwindcss/tailwind.css";
-import React, { useEffect, useReducer, createContext } from "react";
+import React, { useEffect, useReducer, createContext, Dispatch } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 import { AppProps } from "next/app";
+
+// todo 実際に受け取る内容にカスタムしたい
+interface AuthUser {
+  user: any;
+}
+
+interface UserAction {
+  type: string | null;
+  payload: AuthUser;
+}
 
 const initialState = {};
 
 // todo 型定義
-const reducer = (state, action) => {
+const reducer = (state: AuthUser, action: UserAction) => {
   switch (action.type) {
     case "login":
-      return action.payload.authUser;
+      if (action?.payload?.user) {
+        return action.payload.user;
+      } else {
+        return initialState;
+      }
     case "logout":
       return initialState;
     default:
