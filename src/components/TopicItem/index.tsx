@@ -14,7 +14,11 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
 
   // todo 削除前に確認ダイアログ表示させたい
   const deleteTopic = useCallback(() => {
-    // todo ログインしてるかどうか認証機能を挟む
+    if (authUser.id === "") {
+      // ログインしてなければ削除しない
+      return;
+    }
+
     firebaseDB
       .collection("topics")
       .doc(props.id)

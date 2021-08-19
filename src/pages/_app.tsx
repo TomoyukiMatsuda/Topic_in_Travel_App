@@ -1,5 +1,5 @@
 import "tailwindcss/tailwind.css";
-import React, { useEffect, useReducer, createContext, Dispatch } from "react";
+import React, { useEffect, useReducer, createContext } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 import { AppProps } from "next/app";
 
