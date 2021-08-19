@@ -23,7 +23,7 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
         // todo 失敗時ハンドリング
         console.log(error);
       });
-  }, []);
+  }, [props, firebaseDB]);
 
   return (
     <>

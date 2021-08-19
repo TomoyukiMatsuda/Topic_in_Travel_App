@@ -35,7 +35,7 @@ export const Topics: React.VFC = () => {
 
     // Firestore の DB情報更新の検知を解除
     return () => unSubscription();
-  }, []);
+  }, [firebaseDB]);
 
   return (
     <div>
