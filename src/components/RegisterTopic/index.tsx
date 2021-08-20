@@ -1,7 +1,8 @@
 import React, { FormEvent, useState, useCallback, useContext } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
-import { AuthUser, AuthUserContext } from "../../pages/_app";
+import { AuthUser } from "../../pages/_app";
+import { AuthUserContext } from "../../lib/authUserContextProvider";
 
 // トピック登録フォームのコンポーネント
 export const RegisterTopic: React.VFC = () => {

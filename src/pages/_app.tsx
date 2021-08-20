@@ -2,8 +2,9 @@ import "tailwindcss/tailwind.css";
 import React, { useEffect, useReducer, createContext } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 import { AppProps } from "next/app";
+import { AuthUserContext } from "src/lib/authUserContextProvider";
 
-// todo 実際に受け取る内容にカスタムしたい
+// todo type フォルダに移したい
 export interface AuthUser {
   id: string;
   name: string;
@@ -37,14 +38,11 @@ const reducer = (state: AuthUser, action: UserAction) => {
   }
 };
 
-// todo firebase から currentuser 取得できてるので、Context 不要？？
-export const AuthUserContext = createContext(initialState);
-
 function App({ Component, pageProps }: AppProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    // Firebase のログインユーザー情報の変更を監視
+    // Firebase のログインユーザー情報の変更を監視、検知する
     const unSubscription = useListenAuthUserState(dispatch);
 
     return () => unSubscription();
