@@ -7,7 +7,7 @@ export const useListenAuthUserState = (
 ) => {
   return firebaseAuth.onAuthStateChanged((user) => {
     if (user) {
-      // todo ログインユーザーを保持する処理
+      // ログインユーザー情報をセット
       dispatch({
         type: "login",
         payload: {
@@ -17,7 +17,7 @@ export const useListenAuthUserState = (
         },
       });
     } else {
-      // todo ログアウト　ユーザー情報をからにする処理
+      // ログインユーザー情報を空にする
       dispatch({
         type: "logout",
         payload: {
