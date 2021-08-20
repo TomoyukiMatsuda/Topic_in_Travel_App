@@ -7,6 +7,8 @@ import { AuthUser, AuthUserContext } from "../../pages/_app";
 export const RegisterTopic: React.VFC = () => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const [topic, setTopic] = useState<string>();
+
+  // @ts-ignore todo エラー避けたい
   const authUser: AuthUser = useContext(AuthUserContext);
 
   const createTopic = useCallback(

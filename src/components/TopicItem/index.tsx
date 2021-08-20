@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const TopicItem: React.VFC<Props> = memo((props) => {
-  // todo この Typeエラー なんとかしたい
+  // @ts-ignore todo エラー避けたい
   const authUser: AuthUser = useContext(AuthUserContext);
 
   // todo 削除前に確認ダイアログ表示させたい

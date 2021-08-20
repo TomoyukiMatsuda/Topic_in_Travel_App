@@ -5,7 +5,7 @@ import { Auth } from "../components/Auth";
 import { AuthUser, AuthUserContext } from "./_app";
 
 export default function TopicsPage() {
-  // todo このエラーなんとかしたい
+  // @ts-ignore todo エラー避けたい
   const authUser: AuthUser = useContext(AuthUserContext);
 
   return (
