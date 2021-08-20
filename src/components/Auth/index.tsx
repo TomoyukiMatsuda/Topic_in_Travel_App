@@ -1,7 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { firebaseAuth, firebaseGoogleAuthProvider } from "../../firebase";
+import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { AuthUser } from "../../pages/_app";
 
 export const Auth: React.VFC = () => {
+  const authUser: AuthUser = useContext(AuthUserContext);
+
   const signInGoogle = useCallback(async () => {
     await firebaseAuth
       .signInWithPopup(firebaseGoogleAuthProvider)
@@ -41,10 +45,7 @@ export const Auth: React.VFC = () => {
       >
         ログアウト
       </button>
-      {/* todo useContext 使ってログイン状態を取得したい気がする */}
-      {firebaseAuth.currentUser && (
-        <p>{firebaseAuth.currentUser?.displayName} でログインしてる</p>
-      )}
+      {authUser.id && <p>{authUser.name} でログインしてる</p>}
     </>
   );
 };

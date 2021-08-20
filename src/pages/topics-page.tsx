@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { RegisterTopic } from "../components/RegisterTopic";
 import { Topics } from "../components/Topics";
 import { Auth } from "../components/Auth";
-import { AuthUser, AuthUserContext } from "./_app";
+import { AuthUser } from "./_app";
+import { AuthUserContext } from "src/lib/authUserContextProvider";
 
 export default function TopicsPage() {
   // todo dev 環境のみでエラー起きている
