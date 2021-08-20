@@ -5,7 +5,8 @@ import { Auth } from "../components/Auth";
 import { AuthUser, AuthUserContext } from "./_app";
 
 export default function TopicsPage() {
-  // @ts-ignore todo エラー避けたい
+  // todo dev 環境のみでエラー起きている
+  //  TypeError: Cannot read property '_context' of undefined
   const authUser: AuthUser = useContext(AuthUserContext);
 
   return (

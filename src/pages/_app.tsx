@@ -38,7 +38,7 @@ const reducer = (state: AuthUser, action: UserAction) => {
 };
 
 // todo firebase から currentuser 取得できてるので、Context 不要？？
-export const AuthUserContext = createContext({});
+export const AuthUserContext = createContext(initialState);
 
 function App({ Component, pageProps }: AppProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
