@@ -1,7 +1,7 @@
 import Link from "next/link";
-import React from "react";
+import React, { memo } from "react";
 
-export const Header: React.VFC = () => {
+export const Header: React.VFC = memo(() => {
   return (
     <header className="text-center">
       <Link href="/">
@@ -16,4 +16,4 @@ export const Header: React.VFC = () => {
       </Link>
     </header>
   );
-};
+});

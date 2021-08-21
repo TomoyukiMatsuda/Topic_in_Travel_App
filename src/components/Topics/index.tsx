@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { TopicItem } from "../TopicItem";
 import { useTopics } from "../../lib/useTopics";
 
 // 話題一覧画面コンポーネント;
-export const Topics: React.VFC = () => {
+export const Topics: React.VFC = memo(() => {
   // firestore から topics データ取得
   const { topics, getTopicsFromFirestore } = useTopics();
 
@@ -32,4 +32,4 @@ export const Topics: React.VFC = () => {
       )}
     </div>
   );
-};
+});

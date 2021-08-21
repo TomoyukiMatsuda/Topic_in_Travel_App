@@ -1,9 +1,9 @@
-import React, { useCallback, useContext } from "react";
+import React, { memo, useCallback, useContext } from "react";
 import { firebaseAuth, firebaseGoogleAuthProvider } from "../../firebase";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { AuthUser } from "../../pages/_app";
 
-export const Auth: React.VFC = () => {
+export const Auth: React.VFC = memo(() => {
   const authUser: AuthUser = useContext(AuthUserContext);
 
   const signInGoogle = useCallback(async () => {
@@ -53,4 +53,4 @@ export const Auth: React.VFC = () => {
       )}
     </>
   );
-};
+});
