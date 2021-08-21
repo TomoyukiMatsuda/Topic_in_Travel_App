@@ -14,13 +14,13 @@ export const RegisterTopic: React.VFC = () => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(authUser);
-      if (authUser.id === "") {
-        // ログインしてなければトピック登録できない todo エラーメッセージ
-        console.log("ログインしてないから登録できないで！！");
+      if (!authUser.isAdmin) {
+        // Adminユーザーでなければトピック登録できない todo エラーメッセージ
+        console.log("Adminじゃないから登録できないで！！");
         return;
       }
 
-      console.log("ログインしてるから登録できるで！！");
+      console.log("Adminだから登録できるで！！");
       firebaseDB
         .collection("topics")
         .add({

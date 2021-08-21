@@ -16,8 +16,9 @@ export default function TopicsPage() {
         トピック一覧
       </h1>
       <Auth />
-      {/* ログインしていなければ非表示（トピック登録できない） */}
-      {authUser.id !== "" && (
+
+      {authUser.isAdmin && (
+        // 管理者ユーザーでなければ非表示（トピック登録できない)
         <div className="pb-4">
           <RegisterTopic />
         </div>
