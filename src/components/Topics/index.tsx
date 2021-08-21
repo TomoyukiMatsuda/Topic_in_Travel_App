@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { firebaseDB } from "../../firebase";
+import React, { useEffect } from "react";
 import { TopicItem } from "../TopicItem";
 import { useTopics } from "../../lib/useTopics";
 
 // 話題一覧画面コンポーネント;
 export const Topics: React.VFC = () => {
   // firestore から topics データ取得
-  const { topics, getTopics } = useTopics();
+  const { topics, getTopicsFromFirestore } = useTopics();
 
   useEffect(() => {
-    const unSubscription = getTopics();
+    // Firestoreからトピックデータをゲット
+    const unSubscription = getTopicsFromFirestore();
     // Firestore の DB情報更新の検知を解除
     return () => unSubscription();
-  }, [firebaseDB]);
+  }, [getTopicsFromFirestore]);
 
   return (
     <div>

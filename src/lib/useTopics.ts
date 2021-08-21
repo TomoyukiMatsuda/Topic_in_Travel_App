@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { firebaseDB } from "../firebase";
 
-export interface Topic {
+interface Topic {
   id: string;
   content: string;
   timestamp: any;
@@ -17,7 +17,7 @@ export const useTopics = () => {
     } as Topic,
   ]);
 
-  const getTopics = useCallback(() => {
+  const getTopicsFromFirestore = useCallback(() => {
     return firebaseDB
       .collection("topics")
       .orderBy("timestamp", "desc")
@@ -32,5 +32,5 @@ export const useTopics = () => {
       });
   }, [firebaseDB]);
 
-  return { getTopics, topics };
+  return { getTopicsFromFirestore, topics };
 };

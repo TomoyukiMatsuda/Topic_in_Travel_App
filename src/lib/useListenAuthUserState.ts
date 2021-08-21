@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { firebaseAuth } from "../firebase";
 import { AuthUser } from "../pages/_app";
 
-// todo 型定義
+// ログインユーザーの状態監視関数
 export const useListenAuthUserState = (
   dispatch: Dispatch<SetStateAction<any>>
 ) => {
