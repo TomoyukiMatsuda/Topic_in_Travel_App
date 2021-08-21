@@ -7,6 +7,7 @@ import { AuthUserContext } from "src/lib/authUserContextProvider";
 // todo type フォルダに移したい
 export interface AuthUser {
   id: string;
+  isAdmin: false;
   name: string;
   email: string;
 }
@@ -18,6 +19,7 @@ interface UserAction {
 
 const initialState = {
   id: "",
+  isAdmin: false,
   name: "",
   email: "",
 } as AuthUser;

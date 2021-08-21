@@ -10,7 +10,7 @@ export const Auth: React.VFC = () => {
     await firebaseAuth
       .signInWithPopup(firebaseGoogleAuthProvider)
       .then((user) => {
-        // todo ログイン情報を保持 useContext() ?
+        // todo 成功時トースト？
         console.log(user);
       })
       .catch((error) => {
@@ -45,7 +45,12 @@ export const Auth: React.VFC = () => {
       >
         ログアウト
       </button>
-      {authUser.id && <p>{authUser.name} でログインしてる</p>}
+      {authUser.id && (
+        <p>
+          {authUser.name} でログインしてる isAdmin:
+          {authUser.isAdmin ? " true" : " false"}
+        </p>
+      )}
     </>
   );
 };

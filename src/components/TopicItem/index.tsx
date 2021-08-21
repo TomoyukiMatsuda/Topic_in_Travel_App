@@ -14,8 +14,8 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
 
   // todo 削除前に確認ダイアログ表示させたい
   const deleteTopic = useCallback(() => {
-    if (authUser.id === "") {
-      // ログインしてなければ削除しない
+    if (!authUser.isAdmin) {
+      // 管理者ユーザーでなければ削除できない
       return;
     }
 
@@ -37,8 +37,8 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
     <>
       <p>{props.content}</p>
 
-      {authUser.id !== "" && (
-        // ログインしていない場合は削除ボタンを非表示
+      {authUser.isAdmin && (
+        // Adminユーザーでない場合は削除ボタンを非表示
         <DeleteOutline
           className="cursor-pointer text-white bg-red-500 hover:bg-red-400"
           onClick={deleteTopic}

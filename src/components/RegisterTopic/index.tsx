@@ -14,13 +14,11 @@ export const RegisterTopic: React.VFC = () => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(authUser);
-      if (authUser.id === "") {
-        // ログインしてなければトピック登録できない todo エラーメッセージ
-        console.log("ログインしてないから登録できないで！！");
+      if (!authUser.isAdmin) {
+        // Adminユーザーでなければトピック登録できない todo エラーメッセージ
         return;
       }
 
-      console.log("ログインしてるから登録できるで！！");
       firebaseDB
         .collection("topics")
         .add({
@@ -53,7 +51,7 @@ export const RegisterTopic: React.VFC = () => {
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
         />
-        {/*フォーム入力有無でボタンの色変えたい*/}
+        {/* todo フォーム入力有無でボタンの色変えたい*/}
         <button
           className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
