@@ -1,15 +1,22 @@
-import React, { FormEvent, useState, useCallback, useContext } from "react";
+import React, {
+  memo,
+  FormEvent,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
 import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
 
 // トピック登録フォームのコンポーネント
-export const RegisterTopic: React.VFC = () => {
+export const RegisterTopic: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const [topic, setTopic] = useState<string>();
   const authUser: AuthUser = useContext(AuthUserContext);
 
+  // todo hooks化
   const createTopic = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -62,4 +69,4 @@ export const RegisterTopic: React.VFC = () => {
       </form>
     </div>
   );
-};
+});

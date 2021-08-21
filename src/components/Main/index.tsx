@@ -1,8 +1,8 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
 import { useTopics } from "../../lib/useTopics";
 
-export const Main = () => {
+export const Main = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const { getTopicsFromFirestore, topics } = useTopics();
 
@@ -47,4 +47,4 @@ export const Main = () => {
       </button>
     </div>
   );
-};
+});

@@ -1,9 +1,9 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
 
 // todo 話す人だけ、シャッフルするコンポーネントを作成
 // 話題を話す人があるコンポーネント
-export const ShuffleSpeaker: React.VFC = () => {
+export const ShuffleSpeaker: React.VFC = memo(() => {
   const [topic, setTopic] = useState("なにをやねん");
   const [member, setMember] = useState("だれがやねん");
   const [isDefault, setIsDefault] = useState(true);
@@ -163,4 +163,4 @@ export const ShuffleSpeaker: React.VFC = () => {
       </button>
     </div>
   );
-};
+});
