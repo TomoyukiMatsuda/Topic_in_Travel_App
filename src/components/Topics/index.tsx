@@ -1,38 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { firebaseDB } from "../../firebase";
 import { TopicItem } from "../TopicItem";
-
-interface Topic {
-  id: string;
-  content: string;
-  timestamp: any;
-}
+import { useTopics } from "../../lib/useTopics";
 
 // 話題一覧画面コンポーネント;
 export const Topics: React.VFC = () => {
-  const [topics, setTopics] = useState<Array<Topic>>([
-    {
-      id: "",
-      content: "",
-      timestamp: null,
-    },
-  ]);
-
   // firestore から topics データ取得
-  useEffect(() => {
-    const unSubscription = firebaseDB
-      .collection("topics")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setTopics(
-          snapshot.docs.map<Topic>((doc) => ({
-            id: doc.id,
-            content: doc.data().topic,
-            timestamp: doc.data().timestamp,
-          }))
-        );
-      });
+  const { topics, getTopics } = useTopics();
 
+  useEffect(() => {
+    const unSubscription = getTopics();
     // Firestore の DB情報更新の検知を解除
     return () => unSubscription();
   }, [firebaseDB]);
