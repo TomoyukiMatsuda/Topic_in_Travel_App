@@ -14,8 +14,8 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
 
   // todo 削除前に確認ダイアログ表示させたい
   const deleteTopic = useCallback(() => {
+    // 管理者ユーザーでなければ削除できない
     if (!authUser.isAdmin) {
-      // 管理者ユーザーでなければ削除できない
       return;
     }
 
