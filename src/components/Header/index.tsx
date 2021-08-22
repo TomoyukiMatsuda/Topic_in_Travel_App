@@ -1,19 +1,14 @@
-import Link from "next/link";
 import React, { memo } from "react";
 
-export const Header: React.VFC = memo(() => {
+interface Props {
+  title: string;
+}
+
+// ヘッダーコンポーネント
+export const Header: React.VFC<Props> = memo((props) => {
   return (
-    <header className="text-center">
-      <Link href="/">
-        <button className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          <a>シャッフルページ</a>
-        </button>
-      </Link>
-      <Link href="/topics-page">
-        <button className="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          <a>トピック一覧ページ</a>
-        </button>
-      </Link>
+    <header className="flex items-center justify-center h-12 bg-blue-400 items-center text-white font-bold">
+      <h1>{props.title}</h1>
     </header>
   );
 });
