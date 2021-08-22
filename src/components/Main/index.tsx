@@ -24,7 +24,7 @@ export const Main = memo(() => {
   }, [topics, setTopicLabel]);
 
   return (
-    <div className="mt-5 justify-center flex flex-col">
+    <div className="mt-5 flex flex-col">
       <Head>
         <title>トピックる</title>
       </Head>

@@ -1,8 +1,9 @@
 import "tailwindcss/tailwind.css";
-import React, { useEffect, useReducer, createContext } from "react";
+import React, { useEffect, useReducer } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 import { AppProps } from "next/app";
 import { AuthUserContext } from "src/lib/authUserContextProvider";
+import { Footer } from "../components/Footer";
 
 // todo type フォルダに移したい
 export interface AuthUser {
