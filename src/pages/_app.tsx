@@ -3,7 +3,6 @@ import React, { useEffect, useReducer } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 import { AppProps } from "next/app";
 import { AuthUserContext } from "src/lib/authUserContextProvider";
-import { Footer } from "../components/Footer";
 
 // todo type フォルダに移したい
 export interface AuthUser {
@@ -47,7 +46,7 @@ function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // Firebase のログインユーザー情報の変更を監視、検知する
     const unSubscription = useListenAuthUserState(dispatch);
-
+    // ログインユーザー監視をアンマウントのタイミングで解除
     return () => unSubscription();
   }, [dispatch]);
 
