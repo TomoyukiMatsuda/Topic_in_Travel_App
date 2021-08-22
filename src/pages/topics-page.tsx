@@ -11,9 +11,6 @@ export default function TopicsPage() {
 
   return (
     <PageTemplate>
-      <h1 className="text-xl text-center mt-5 font-bold text-blue-500">
-        トピック一覧
-      </h1>
       <Auth />
       {authUser.isAdmin && (
         // 管理者ユーザーでなければ非表示（トピック登録できない)
