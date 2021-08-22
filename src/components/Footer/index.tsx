@@ -54,7 +54,8 @@ export const Footer: React.VFC<Props> = memo((props) => {
         className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold`"
         onClick={authUser.id ? signOutGoogle : signInGoogle}
       >
-        {authUser.id ? "ログアウト" : "ログイン"}
+        {/*文言修正*/}
+        {authUser.id ? authUser.name : "ログイン"}
       </button>
     </footer>
   );
