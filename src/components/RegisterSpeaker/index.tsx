@@ -1,19 +1,19 @@
 import React, {
-  memo,
   FormEvent,
-  useState,
+  memo,
   useCallback,
   useContext,
+  useState,
 } from "react";
-import { firebaseDB } from "../../firebase";
-import firebase from "firebase/app";
 import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { firebaseDB } from "../../firebase";
+import firebase from "firebase";
 
-// トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい
-export const RegisterTopic: React.VFC = memo(() => {
+// 話す人を登録するフォームのコンポーネント
+export const RegisterSpeaker: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
-  const [topic, setTopic] = useState<string>();
+  const [speaker, setSpeaker] = useState<string>();
   const authUser: AuthUser = useContext(AuthUserContext);
 
   // todo hooks化
@@ -21,15 +21,16 @@ export const RegisterTopic: React.VFC = memo(() => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(authUser);
-      if (!authUser.isAdmin) {
+      if (!authUser.id) {
         // Adminユーザーでなければトピック登録できない todo エラーメッセージ
         return;
       }
 
       firebaseDB
-        .collection("topics")
+        .collection("speakers")
         .add({
-          topic: topic,
+          //userId: userId, todo ログインユーザー情報と紐付ける
+          speaker: speaker,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then((data) => {
@@ -41,28 +42,28 @@ export const RegisterTopic: React.VFC = memo(() => {
           console.log(e);
         });
 
-      setTopic("");
+      setSpeaker("");
     },
-    [topic, authUser]
+    [speaker, authUser]
   );
 
   return (
     <div>
       <form className="px-8 pt-6" onSubmit={createTopic}>
         <label className="block text-gray-700 text-sm font-bold mb-2">
-          NEW トピック
+          人の名前を登録
         </label>
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="例：職業を好きに選べるとしたら何を選ぶ？"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
+          placeholder="会話に参加してる人の名前を入力しよう！"
+          value={speaker}
+          onChange={(e) => setSpeaker(e.target.value)}
         />
         {/* todo フォーム入力有無でボタンの色変えたい*/}
         <button
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
-          disabled={!topic}
+          disabled={!speaker}
         >
           登録
         </button>
