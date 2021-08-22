@@ -54,7 +54,6 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <AuthUserContext.Provider value={state}>
       <Component {...pageProps} />
-      <Footer />
     </AuthUserContext.Provider>
   );
 }
