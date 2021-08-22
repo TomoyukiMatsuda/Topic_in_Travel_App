@@ -1,11 +1,11 @@
 import React, { memo, useEffect } from "react";
 import { TopicItem } from "../TopicItem";
-import { useTopics } from "../../lib/useTopics";
+import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 
 // 話題一覧画面コンポーネント;
 export const Topics: React.VFC = memo(() => {
   // firestore から topics データ取得
-  const { topics, getTopicsFromFirestore } = useTopics();
+  const { topics, getTopicsFromFirestore } = useDbFromFirestore();
 
   useEffect(() => {
     // Firestoreからトピックデータをゲット
