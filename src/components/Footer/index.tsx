@@ -1,6 +1,25 @@
 import React from "react";
 import Link from "next/link";
 
+const footerItems = [
+  {
+    href: "/",
+    label: "シャッフル",
+  },
+  {
+    href: "/topic-page",
+    label: "カテゴリー",
+  },
+  {
+    href: "/speaker",
+    label: "話す人",
+  },
+  {
+    href: "/login",
+    label: "ログイン",
+  },
+];
+
 export const Footer: React.VFC = () => {
   return (
     <footer className="bg-blue-300">

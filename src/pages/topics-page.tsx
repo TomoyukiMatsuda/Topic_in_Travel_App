@@ -11,7 +11,7 @@ export default function TopicsPage() {
   const authUser: AuthUser = useContext(AuthUserContext);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <Header />
       <div className="flex-grow overflow-y-scroll">
         <h1 className="text-xl text-center mt-5 font-bold text-blue-500">
