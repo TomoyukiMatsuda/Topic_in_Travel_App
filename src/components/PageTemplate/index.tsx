@@ -15,6 +15,8 @@ const headerTitle = (path: string): string => {
       return "シャッフル";
     case "/topics-page":
       return "トピック一覧";
+    case "/register-speaker-page":
+      return "会話に参加してる人を登録";
     default:
       return "トピックる";
   }

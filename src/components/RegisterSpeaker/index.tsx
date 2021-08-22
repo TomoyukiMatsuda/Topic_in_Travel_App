@@ -22,7 +22,7 @@ export const RegisterSpeaker: React.VFC = memo(() => {
       e.preventDefault();
       console.log(authUser);
       if (!authUser.id) {
-        // Adminユーザーでなければトピック登録できない todo エラーメッセージ
+        // ログインしていなければ話す人を登録できない todo エラーメッセージ
         return;
       }
 
