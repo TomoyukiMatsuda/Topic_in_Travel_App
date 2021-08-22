@@ -22,29 +22,14 @@ const footerItems = [
 
 export const Footer: React.VFC = () => {
   return (
-    <footer className="bg-blue-300">
-      <div className="grid grid-cols-4 text-center">
-        <Link href="/">
+    <footer className="h-12 bg-blue-300 grid grid-cols-4 text-center">
+      {footerItems.map((item) => (
+        <Link href={item.href}>
           <button className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold">
-            <a>シャッフル</a>
+            <a>{item.label}</a>
           </button>
         </Link>
-        <Link href="/topics-page">
-          <button className="bg-blue-400 hover:bg-blue-300 text-white font-bold">
-            <a>カテゴリ一覧</a>
-          </button>
-        </Link>
-        <Link href="/speaker">
-          <button className="bg-blue-400 hover:bg-blue-300 text-white font-bold">
-            <a>話す人</a>
-          </button>
-        </Link>
-        <Link href="/login">
-          <button className="bg-blue-400 hover:bg-blue-300 text-white font-bold">
-            <a>アカウント</a>
-          </button>
-        </Link>
-      </div>
+      ))}
     </footer>
   );
 };
