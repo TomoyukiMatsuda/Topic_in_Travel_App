@@ -1,6 +1,8 @@
-import React, { useCallback, memo } from "react";
+import React, { useCallback, memo, useContext } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useGoogleAuth } from "../../lib/useGoogleAuth";
+import { AuthUser } from "../../pages/_app";
+import { AuthUserContext } from "../../lib/authUserContextProvider";
 
 interface Props {
   pathname: string;
@@ -19,10 +21,6 @@ const footerItems = [
     href: "/speaker", // todo ページを用意
     label: "話す人",
   },
-  {
-    href: "/login", // todo ページを用意
-    label: "ログイン",
-  },
 ];
 
 // フッターアイテムの色を判断 todo useStateとかを利用した方が良い？
@@ -32,8 +30,11 @@ const decideItemColor = (href: string, pathname: string): string => {
 };
 
 export const Footer: React.VFC<Props> = memo((props) => {
+  const authUser: AuthUser = useContext(AuthUserContext);
+  const { signInGoogle, signOutGoogle } = useGoogleAuth();
+
   return (
-    <footer className="h-12 bg-blue-300 grid grid-cols-4 text-center">
+    <footer className="h-12 grid grid-cols-4 text-center">
       {footerItems.map((item) => (
         <Link href={item.href}>
           <button
@@ -49,6 +50,13 @@ export const Footer: React.VFC<Props> = memo((props) => {
           </button>
         </Link>
       ))}
+      <button
+        className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold`"
+        onClick={authUser.id ? signOutGoogle : signInGoogle}
+      >
+        {/*文言修正*/}
+        {authUser.id ? authUser.name : "ログイン"}
+      </button>
     </footer>
   );
 });
