@@ -3,6 +3,7 @@ import { AuthUserContext } from "src/lib/authUserContextProvider";
 import { PageTemplate } from "../components/PageTemplate";
 import { AuthUser } from "./_app";
 import { RegisterSpeaker } from "../components/RegisterSpeaker";
+import { Speakers } from "../components/Speakers";
 
 export default function RegisterSpeakerPage() {
   const authUser: AuthUser = useContext(AuthUserContext);
@@ -19,6 +20,7 @@ export default function RegisterSpeakerPage() {
         "ログインしてね、ログインすると話す人を登録できるよ"
       )}
       {/*todo 登録した話す人一覧を表示*/}
+      <Speakers />
     </PageTemplate>
   );
 }

@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
-import { useDbFromFirestore } from "../../lib/useTopics";
+import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 
 export const Main = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
