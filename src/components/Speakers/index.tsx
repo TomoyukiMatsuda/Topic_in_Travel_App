@@ -14,6 +14,7 @@ export const Speakers: React.VFC = memo(() => {
     return () => unSubscription();
   }, [getSpeakersFromFirestore]);
 
+  // todo ログインユーザーと紐づいた話す人だけを表示させたい
   return (
     <div>
       {speakers[0]?.id && (

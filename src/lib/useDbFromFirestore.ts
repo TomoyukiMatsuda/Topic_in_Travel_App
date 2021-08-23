@@ -45,6 +45,7 @@ export const useDbFromFirestore = () => {
       });
   }, [firebaseDB]);
 
+  // todo ログインユーザーと紐づいたspeakerデータを取得したい
   const getSpeakersFromFirestore = useCallback(() => {
     return firebaseDB
       .collection("speakers")
@@ -53,7 +54,7 @@ export const useDbFromFirestore = () => {
         setSpeakers(
           snapshot.docs.map<Speaker>((doc) => ({
             id: doc.id,
-            name: doc.data().speaker,
+            name: doc.data().name,
             timestamp: doc.data().timestamp,
           }))
         );
