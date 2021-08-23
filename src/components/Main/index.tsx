@@ -1,10 +1,10 @@
 import { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
-import { useTopics } from "../../lib/useTopics";
+import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 
 export const Main = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
-  const { getTopicsFromFirestore, topics } = useTopics();
+  const { getTopicsFromFirestore, topics } = useDbFromFirestore();
 
   // 話題切り替え時に表示を初期化
   useEffect(() => {

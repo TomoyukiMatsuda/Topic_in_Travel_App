@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useContext } from "react";
+import React, { memo, useContext } from "react";
 import Link from "next/link";
 import { useGoogleAuth } from "../../lib/useGoogleAuth";
 import { AuthUser } from "../../pages/_app";
@@ -18,7 +18,7 @@ const footerItems = [
     label: "一覧",
   },
   {
-    href: "/speaker", // todo ページを用意
+    href: "/register-speaker-page",
     label: "話す人",
   },
 ];
@@ -54,7 +54,7 @@ export const Footer: React.VFC<Props> = memo((props) => {
         className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold`"
         onClick={authUser.id ? signOutGoogle : signInGoogle}
       >
-        {/*文言修正*/}
+        {/* todo 文言修正*/}
         {authUser.id ? authUser.name : "ログイン"}
       </button>
     </footer>
