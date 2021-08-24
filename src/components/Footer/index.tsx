@@ -36,7 +36,7 @@ export const Footer: React.VFC<Props> = memo((props) => {
   return (
     <footer className="h-12 grid grid-cols-4 text-center">
       {footerItems.map((item) => (
-        <Link href={item.href}>
+        <Link key={item.href} href={item.href}>
           <button
             className={`bg-${decideItemColor(
               item.href,
