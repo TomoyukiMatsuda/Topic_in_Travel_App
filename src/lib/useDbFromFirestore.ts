@@ -11,6 +11,7 @@ interface Topic {
 
 interface Speaker {
   id: string;
+  userId: string;
   name: string;
   timestamp: any;
 }
@@ -28,6 +29,7 @@ export const useDbFromFirestore = () => {
   const [speakers, setSpeakers] = useState<Array<Speaker>>([
     {
       id: "",
+      userId: "",
       name: "",
       timestamp: null,
     } as Speaker,
@@ -57,6 +59,7 @@ export const useDbFromFirestore = () => {
         setSpeakers(
           snapshot.docs.map<Speaker>((doc) => ({
             id: doc.id,
+            userId: doc.data().userId,
             name: doc.data().name,
             timestamp: doc.data().timestamp,
           }))
