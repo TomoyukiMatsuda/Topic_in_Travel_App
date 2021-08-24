@@ -6,46 +6,46 @@ import { AuthUserContext } from "../../lib/authUserContextProvider";
 
 interface Props {
   id: string;
+  userId: string;
   name: string;
 }
 
 export const SpeakerItem: React.VFC<Props> = memo((props) => {
   const authUser: AuthUser = useContext(AuthUserContext);
 
-  // todo 削除機能:スピーカー作成時にログインユーザーと紐付けて登録する
-  // const deleteTopic = useCallback(() => {
-  //   // todo 該当ユーザーが登録した人でないと削除できないようにする
-  //   if (!authUser.id) {
-  //     return;
-  //   }
-  //
-  //   firebaseDB
-  //     .collection("speakers")
-  //     .doc(props.id)
-  //     .delete()
-  //     .then((data) => {
-  //       // todo 成功時ハンドリング
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       // todo 失敗時ハンドリング
-  //       console.log(error);
-  //     });
-  // }, [props, firebaseDB]);
+  const deleteSpeaker = useCallback(() => {
+    // 該当ユーザーが登録したスピーカーでないと削除できない todo エラーハンドリング
+    if (authUser.id !== props.userId) {
+      return;
+    }
+
+    firebaseDB
+      .collection("speakers")
+      .doc(props.id)
+      .delete()
+      .then((data) => {
+        // todo 成功時ハンドリング
+        console.log(data);
+      })
+      .catch((error) => {
+        // todo 失敗時ハンドリング
+        console.log(error);
+      });
+  }, [props, firebaseDB]);
 
   return (
     <>
       <p>{props.name}</p>
 
       {/*todo スピーカー削除機能*/}
-      {/*{authUser.id && (*/}
-      {/*  <DeleteOutline*/}
-      {/*    className="cursor-pointer text-white bg-red-500 hover:bg-red-400"*/}
-      {/*    onClick={deleteTopic}*/}
-      {/*  >*/}
-      {/*    削除*/}
-      {/*  </DeleteOutline>*/}
-      {/*)}*/}
+      {authUser.id && (
+        <DeleteOutline
+          className="cursor-pointer text-white bg-red-500 hover:bg-red-400"
+          onClick={deleteSpeaker}
+        >
+          削除
+        </DeleteOutline>
+      )}
     </>
   );
 });

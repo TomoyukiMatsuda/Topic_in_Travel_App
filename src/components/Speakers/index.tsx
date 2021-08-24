@@ -29,7 +29,11 @@ export const Speakers: React.VFC = memo(() => {
                 className="flex justify-between my-5 border-b-2"
                 key={speaker.id}
               >
-                <SpeakerItem id={speaker.id} name={speaker.name} />
+                <SpeakerItem
+                  id={speaker.id}
+                  userId={speaker.userId}
+                  name={speaker.name}
+                />
               </div>
             );
           })}
