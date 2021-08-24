@@ -29,8 +29,8 @@ export const RegisterSpeaker: React.VFC = memo(() => {
       firebaseDB
         .collection("speakers")
         .add({
-          //userId: userId, todo ログインユーザー情報と紐付ける
-          speaker: speaker,
+          userId: authUser.id, // ログインユーザーidをdataに持たせる
+          name: speaker,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then((data) => {

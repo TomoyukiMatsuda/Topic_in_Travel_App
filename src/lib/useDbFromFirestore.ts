@@ -1,5 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useContext } from "react";
 import { firebaseDB } from "../firebase";
+import { AuthUser } from "../pages/_app";
+import { AuthUserContext } from "./authUserContextProvider";
 
 interface Topic {
   id: string;
@@ -15,6 +17,7 @@ interface Speaker {
 
 // Topics と Speakers 取得 hooks todo 共通化
 export const useDbFromFirestore = () => {
+  const authUser: AuthUser = useContext(AuthUserContext);
   const [topics, setTopics] = useState<Array<Topic>>([
     {
       id: "",
@@ -43,22 +46,23 @@ export const useDbFromFirestore = () => {
           }))
         );
       });
-  }, [firebaseDB]);
+  }, [firebaseDB, setTopics]);
 
   const getSpeakersFromFirestore = useCallback(() => {
+    // todo: できれば降順で取得したい
     return firebaseDB
       .collection("speakers")
-      .orderBy("timestamp", "desc")
+      .where("userId", "==", authUser.id) // ログインユーザーidと紐づいたspeakerを取得
       .onSnapshot((snapshot) => {
         setSpeakers(
           snapshot.docs.map<Speaker>((doc) => ({
             id: doc.id,
-            name: doc.data().speaker,
+            name: doc.data().name,
             timestamp: doc.data().timestamp,
           }))
         );
       });
-  }, [firebaseDB]);
+  }, [firebaseDB, authUser, setSpeakers]);
 
   return { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers };
 };
