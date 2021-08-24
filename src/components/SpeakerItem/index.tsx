@@ -37,7 +37,6 @@ export const SpeakerItem: React.VFC<Props> = memo((props) => {
     <>
       <p>{props.name}</p>
 
-      {/*todo スピーカー削除機能*/}
       {authUser.id && (
         <DeleteOutline
           className="cursor-pointer text-white bg-red-500 hover:bg-red-400"
