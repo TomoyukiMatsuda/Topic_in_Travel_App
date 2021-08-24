@@ -9,9 +9,9 @@ export const Topics: React.VFC = memo(() => {
 
   useEffect(() => {
     // Firestoreからトピックデータをゲット
-    const unSubscription = getTopicsFromFirestore();
+    const unSubscribe = getTopicsFromFirestore();
     // Firestore の DB情報更新の検知を解除
-    return () => unSubscription();
+    return () => unSubscribe();
   }, [getTopicsFromFirestore]);
 
   return (
