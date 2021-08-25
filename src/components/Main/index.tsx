@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { MainButton } from "./MainButton";
 
 export const Main = memo(() => {
   const authUser: AuthUser = useContext(AuthUserContext);
@@ -46,6 +47,10 @@ export const Main = memo(() => {
     }
   }, [topics, setTopicLabel, speakers, setSpeaker, authUser.id, isShowSpeaker]);
 
+  const switchShowSpeaker = useCallback(() => {
+    setIsShowSpeaker(!isShowSpeaker);
+  }, [isShowSpeaker, setIsShowSpeaker]);
+
   return (
     <div className="mt-5 flex flex-col">
       <Head>
@@ -66,19 +71,13 @@ export const Main = memo(() => {
           : `なにを？： ${topicLabel}`}
       </p>
 
-      <button
-        className="w-1/2 font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 mx-auto mt-1"
-        onClick={onClickShuffle}
-      >
+      <MainButton color="blue" onClickFunc={onClickShuffle}>
         ぷっしゅ
-      </button>
+      </MainButton>
       {authUser.id && (
-        <button
-          className="w-1/2 font-bold text-2xl bg-yellow-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 mx-auto mt-1"
-          onClick={() => setIsShowSpeaker(!isShowSpeaker)}
-        >
+        <MainButton color="yellow" onClickFunc={switchShowSpeaker}>
           {isShowSpeaker ? "話す人いらない" : "話す人いる"}
-        </button>
+        </MainButton>
       )}
     </div>
   );
