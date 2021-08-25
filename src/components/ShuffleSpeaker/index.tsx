@@ -96,18 +96,6 @@ export const ShuffleSpeaker: React.VFC = memo(() => {
     "アリサさん",
   ];
 
-  // 小池たちバージョン
-  // const members: Array<string> = [
-  //   "池氏",
-  //   "松本くん",
-  //   "小池（♀）",
-  //   "ゆめち",
-  //   "まつにい",
-  // ];
-
-  // キャンプメンツ
-  // const members: Array<string> = ["よっしーパイセン", "アサイ君", "まつだ氏"];
-
   // 話題切り替え時に表示を初期化
   useEffect(() => {
     setTopic("なにをやねん");
