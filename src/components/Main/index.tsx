@@ -1,4 +1,10 @@
-import { useCallback, useState, useEffect, memo, useContext } from "react";
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  memo,
+  useContext,
+} from "react";
 import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { AuthUser } from "../../pages/_app";
@@ -6,7 +12,7 @@ import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 
-export const Main = memo(() => {
+export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
