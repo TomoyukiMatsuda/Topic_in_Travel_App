@@ -72,12 +72,14 @@ export const Main = memo(() => {
       >
         ぷっしゅ
       </button>
-      <button
-        className="w-1/2 font-bold text-2xl bg-yellow-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 mx-auto mt-1"
-        onClick={() => setIsShowSpeaker(!isShowSpeaker)}
-      >
-        {isShowSpeaker ? "話す人いらない" : "話す人いる"}
-      </button>
+      {authUser.id && (
+        <button
+          className="w-1/2 font-bold text-2xl bg-yellow-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 mx-auto mt-1"
+          onClick={() => setIsShowSpeaker(!isShowSpeaker)}
+        >
+          {isShowSpeaker ? "話す人いらない" : "話す人いる"}
+        </button>
+      )}
     </div>
   );
 });
