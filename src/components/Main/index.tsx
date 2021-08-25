@@ -4,13 +4,13 @@ import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { MainButton } from "./MainButton";
+import { ShuffleLabel } from "./ShuffleLabel";
 
 export const Main = memo(() => {
-  const authUser: AuthUser = useContext(AuthUserContext);
-
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
+  const authUser: AuthUser = useContext(AuthUserContext);
   const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
     useDbFromFirestore();
 
@@ -57,24 +57,24 @@ export const Main = memo(() => {
         <title>トピックる</title>
       </Head>
 
-      {/* todo スピーカーとトピックをコンポーネント化して再利用*/}
       {authUser.id && isShowSpeaker && (
         // ログインしていなければスピーカー非表示
-        <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
+        <ShuffleLabel>
           {speaker === "だれがやねん" ? speaker : `だれが？： ${speaker}`}
-        </p>
+        </ShuffleLabel>
       )}
       {/*todo トピックの文字数が変わってもボタン位置が変わらないようにしたい*/}
-      <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
+      <ShuffleLabel>
         {topicLabel === "なにをやねん"
           ? topicLabel
           : `なにを？： ${topicLabel}`}
-      </p>
+      </ShuffleLabel>
 
       <MainButton color="blue" onClickFunc={onClickShuffle}>
         ぷっしゅ
       </MainButton>
       {authUser.id && (
+        // ログインしていなければ非表示
         <MainButton color="yellow" onClickFunc={switchShowSpeaker}>
           {isShowSpeaker ? "話す人いらない" : "話す人いる"}
         </MainButton>
