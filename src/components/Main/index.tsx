@@ -1,15 +1,22 @@
-import { useCallback, useState, useEffect, memo, useContext } from "react";
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  memo,
+  useContext,
+} from "react";
 import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { MainButton } from "./MainButton";
+import { ShuffleLabel } from "./ShuffleLabel";
 
-export const Main = memo(() => {
-  const authUser: AuthUser = useContext(AuthUserContext);
-
+export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
+  const authUser: AuthUser = useContext(AuthUserContext);
   const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
     useDbFromFirestore();
 
@@ -46,38 +53,38 @@ export const Main = memo(() => {
     }
   }, [topics, setTopicLabel, speakers, setSpeaker, authUser.id, isShowSpeaker]);
 
+  const switchShowSpeaker = useCallback(() => {
+    setIsShowSpeaker(!isShowSpeaker);
+  }, [isShowSpeaker, setIsShowSpeaker]);
+
   return (
     <div className="mt-5 flex flex-col">
       <Head>
         <title>トピックる</title>
       </Head>
 
-      {/* todo スピーカーとトピックをコンポーネント化して再利用*/}
       {authUser.id && isShowSpeaker && (
         // ログインしていなければスピーカー非表示
-        <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
+        <ShuffleLabel>
           {speaker === "だれがやねん" ? speaker : `だれが？： ${speaker}`}
-        </p>
+        </ShuffleLabel>
       )}
       {/*todo トピックの文字数が変わってもボタン位置が変わらないようにしたい*/}
-      <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
+      <ShuffleLabel>
         {topicLabel === "なにをやねん"
           ? topicLabel
           : `なにを？： ${topicLabel}`}
-      </p>
+      </ShuffleLabel>
 
-      <button
-        className="w-1/2 font-bold text-2xl bg-blue-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 mx-auto mt-1"
-        onClick={onClickShuffle}
-      >
+      <MainButton color="blue" onClickFunc={onClickShuffle}>
         ぷっしゅ
-      </button>
-      <button
-        className="w-1/2 font-bold text-2xl bg-yellow-400 py-2 px-4 rounded-xl text-white hover:bg-blue-300 mx-auto mt-1"
-        onClick={() => setIsShowSpeaker(!isShowSpeaker)}
-      >
-        {isShowSpeaker ? "話す人いらない" : "話す人いる"}
-      </button>
+      </MainButton>
+      {authUser.id && (
+        // ログインしていなければ非表示
+        <MainButton color="yellow" onClickFunc={switchShowSpeaker}>
+          {isShowSpeaker ? "話す人いらない" : "話す人いる"}
+        </MainButton>
+      )}
     </div>
   );
 });
