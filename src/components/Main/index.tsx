@@ -1,8 +1,13 @@
-import { useCallback, useState, useEffect, memo } from "react";
+import { useCallback, useState, useEffect, memo, useContext } from "react";
 import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
+import { AuthUser } from "../../pages/_app";
+import { AuthUserContext } from "../../lib/authUserContextProvider";
 
 export const Main = memo(() => {
+  const authUser: AuthUser = useContext(AuthUserContext);
+
+  //  todo オンオフ切り替え
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
@@ -12,7 +17,7 @@ export const Main = memo(() => {
   useEffect(() => {
     setTopicLabel("なにをやねん");
     setSpeaker("だれがやねん");
-  }, [setTopicLabel, setSpeaker]);
+  }, [setTopicLabel, setSpeaker, authUser]);
 
   // Firestore からトピックスを取得
   useEffect(() => {
@@ -22,18 +27,21 @@ export const Main = memo(() => {
       getTopicsUnSubscribe();
       getSpeakersUnSubscribe();
     };
-  }, [getTopicsFromFirestore, getSpeakersFromFirestore]);
+  }, [getTopicsFromFirestore, getSpeakersFromFirestore, authUser]);
 
   // todo シャッフル確率最適化 一回表示対象となった場合配列をから要素を削除することを検討する
   //  https://qiita.com/pure-adachi/items/77fdf665ff6e5ea22128
   const onClickShuffle = useCallback(() => {
-    // シャッフル番号を算出
+    // トピックシャッフル
     let topicNum = Math.floor(Math.random() * topics.length);
-    let speakerNum = Math.floor(Math.random() * speakers.length);
-    // トピック、スピーカーをセット
     setTopicLabel(topics[topicNum].content);
-    setSpeaker(speakers[speakerNum].name);
-  }, [topics, setTopicLabel, speakers, setSpeaker]);
+
+    if (authUser.id) {
+      // ログイン時のみスピーカーシャッフル実行
+      let speakerNum = Math.floor(Math.random() * speakers.length);
+      setSpeaker(speakers[speakerNum].name);
+    }
+  }, [topics, setTopicLabel, speakers, setSpeaker, authUser.id]);
 
   return (
     <div className="mt-5 flex flex-col">
@@ -44,9 +52,12 @@ export const Main = memo(() => {
       {/* todo スピーカーとトピックをコンポーネント化して再利用
             スピーカー利用、オンオフ切り替え
       */}
-      <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
-        {speaker === "だれがやねん" ? speaker : `だれが？： ${speaker}`}
-      </p>
+      {authUser.id && (
+        // ログインしていなければスピーカー非表示
+        <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
+          {speaker === "だれがやねん" ? speaker : `だれが？： ${speaker}`}
+        </p>
+      )}
       {/*todo トピックの文字数が変わってもボタン位置が変わらないようにしたい*/}
       <p className="text-center text-gray-600 text-xl font-bold  font-mono m-5 mx-auto">
         {topicLabel === "なにをやねん"
