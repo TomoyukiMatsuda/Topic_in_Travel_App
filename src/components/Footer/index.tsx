@@ -26,7 +26,7 @@ const footerItems = [
 // フッターアイテムの色を判断 todo useStateとかを利用した方が良い？
 const decideItemColor = (href: string, pathname: string): string => {
   // パスと一致 ? 青 : 黄
-  return href == pathname ? "blue" : "yellow";
+  return href == pathname ? "500" : "400";
 };
 
 export const Footer: React.VFC<Props> = memo((props) => {
@@ -38,20 +38,17 @@ export const Footer: React.VFC<Props> = memo((props) => {
       {footerItems.map((item) => (
         <Link key={item.href} href={item.href}>
           <button
-            className={`bg-${decideItemColor(
+            className={`bg-blue-${decideItemColor(
               item.href,
               props.pathname
-            )}-400 hover:bg-${decideItemColor(
-              item.href,
-              props.pathname
-            )}-300 text-white font-bold`}
+            )} hover:bg-blue-300 text-white font-bold`}
           >
             <a>{item.label}</a>
           </button>
         </Link>
       ))}
       <button
-        className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold`"
+        className="bg-blue-400 hover:bg-blue-300 text-white font-bold`"
         onClick={authUser.id ? signOutGoogle : signInGoogle}
       >
         {/* todo 文言修正*/}
