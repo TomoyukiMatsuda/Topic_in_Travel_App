@@ -82,7 +82,7 @@ export const Main: React.VFC = memo(() => {
       {authUser.id && (
         // ログインしていなければ非表示
         <MainButton color="yellow" onClickFunc={switchShowSpeaker}>
-          {isShowSpeaker ? "話す人いらない" : "話す人いる"}
+          {isShowSpeaker ? "話す人OFF" : "話す人ON"}
         </MainButton>
       )}
     </div>
