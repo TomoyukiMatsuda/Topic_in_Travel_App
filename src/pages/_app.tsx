@@ -3,6 +3,7 @@ import React, { useEffect, useReducer } from "react";
 import { useListenAuthUserState } from "../lib/useListenAuthUserState";
 import { AppProps } from "next/app";
 import { AuthUserContext } from "src/lib/authUserContextProvider";
+import { RecoilRoot } from "recoil";
 
 // todo type フォルダに移したい
 export interface AuthUser {
@@ -50,6 +51,7 @@ function App({ Component, pageProps }: AppProps) {
     return () => unSubscription();
   }, [dispatch]);
 
+  // todo: RecoilRootで囲う、context廃止する
   return (
     <AuthUserContext.Provider value={state}>
       <Component {...pageProps} />
