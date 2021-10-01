@@ -7,10 +7,10 @@ import React, {
 } from "react";
 import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
-import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
+import { AuthUser } from "../../types/AuthUser";
 
 export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");

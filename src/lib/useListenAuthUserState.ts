@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { firebaseAuth } from "../firebase";
-import { AuthUser } from "../pages/_app";
+import { AuthUser } from "../types/AuthUser";
 
 // ログインユーザーの状態監視関数
 export const useListenAuthUserState = (

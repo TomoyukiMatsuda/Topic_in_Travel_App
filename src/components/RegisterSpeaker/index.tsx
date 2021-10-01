@@ -5,10 +5,10 @@ import React, {
   useContext,
   useState,
 } from "react";
-import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase";
+import { AuthUser } from "../../types/AuthUser";
 
 // 話す人を登録するフォームのコンポーネント
 export const RegisterSpeaker: React.VFC = memo(() => {
