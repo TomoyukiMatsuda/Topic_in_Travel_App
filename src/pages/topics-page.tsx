@@ -3,7 +3,7 @@ import { RegisterTopic } from "../components/RegisterTopic";
 import { Topics } from "../components/Topics";
 import { AuthUserContext } from "src/lib/authUserContextProvider";
 import { PageTemplate } from "../components/PageTemplate";
-import { AuthUser } from "./_app";
+import { AuthUser } from "../types/AuthUser";
 
 export default function TopicsPage() {
   const authUser: AuthUser = useContext(AuthUserContext);

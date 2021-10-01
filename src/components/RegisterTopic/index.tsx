@@ -7,8 +7,8 @@ import React, {
 } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
-import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { AuthUser } from "../../types/AuthUser";
 
 // トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい
 export const RegisterTopic: React.VFC = memo(() => {
