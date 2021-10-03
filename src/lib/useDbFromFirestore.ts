@@ -3,6 +3,7 @@ import { firebaseDB } from "../firebase";
 import { AuthUser } from "../pages/_app";
 import { AuthUserContext } from "./authUserContextProvider";
 
+// todo: timestamp: any型を避けたい
 interface Topic {
   id: string;
   content: string;
@@ -19,6 +20,7 @@ interface Speaker {
 // Topics と Speakers 取得 hooks todo 共通化
 export const useDbFromFirestore = () => {
   const authUser: AuthUser = useContext(AuthUserContext);
+  // todo: 初期化方法これで良い？
   const [topics, setTopics] = useState<Array<Topic>>([
     {
       id: "",
@@ -35,6 +37,7 @@ export const useDbFromFirestore = () => {
     } as Speaker,
   ]);
 
+  // todo: snapshot をやめて 取得→グローバルステートに更新で、更新処理を走らせたいタイミングで再度取得処理にする？
   const getTopicsFromFirestore = useCallback(() => {
     return firebaseDB
       .collection("topics")
