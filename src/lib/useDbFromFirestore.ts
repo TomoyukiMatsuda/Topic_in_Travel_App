@@ -1,7 +1,7 @@
 import { useCallback, useState, useContext } from "react";
 import { firebaseDB } from "../firebase";
-import { AuthUser } from "../pages/_app";
 import { AuthUserContext } from "./authUserContextProvider";
+import { AuthUser } from "../types/AuthUser";
 
 // todo: timestamp: any型を避けたい
 interface Topic {

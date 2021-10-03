@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useContext } from "react";
 import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
-import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { AuthUser } from "../../types/AuthUser";
 
 interface Props {
   id: string;

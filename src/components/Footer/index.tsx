@@ -1,8 +1,8 @@
 import React, { memo, useContext } from "react";
 import Link from "next/link";
 import { useGoogleAuth } from "../../lib/useGoogleAuth";
-import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { AuthUser } from "../../types/AuthUser";
 
 interface Props {
   pathname: string;

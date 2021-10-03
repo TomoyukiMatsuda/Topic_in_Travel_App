@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { AuthUser } from "../pages/_app";
+import { AuthUser } from "../types/AuthUser";
 
 export const AuthUserContext = createContext({
   id: "",

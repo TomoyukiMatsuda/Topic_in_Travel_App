@@ -1,8 +1,8 @@
 import React, { memo, useContext, useEffect } from "react";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { SpeakerItem } from "../SpeakerItem";
-import { AuthUser } from "../../pages/_app";
 import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { AuthUser } from "../../types/AuthUser";
 
 // 話す人一覧画面コンポーネント
 export const Speakers: React.VFC = memo(() => {
