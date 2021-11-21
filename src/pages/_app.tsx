@@ -5,7 +5,7 @@ import { AppProps } from "next/app";
 import { AuthUserContext } from "src/lib/authUserContextProvider";
 import { RecoilRoot } from "recoil";
 
-// todo type フォルダに移したい
+// todo 削除、atomファイルに定義してある
 export interface AuthUser {
   id: string;
   isAdmin: false;
@@ -51,10 +51,12 @@ function App({ Component, pageProps }: AppProps) {
     return () => unSubscription();
   }, [dispatch]);
 
-  // todo: RecoilRootで囲う、context廃止する
+  // todo: context廃止する
   return (
     <AuthUserContext.Provider value={state}>
-      <Component {...pageProps} />
+      <RecoilRoot>
+        <Component {...pageProps} />
+      </RecoilRoot>
     </AuthUserContext.Provider>
   );
 }
