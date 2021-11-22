@@ -1,13 +1,13 @@
-import React, { memo, useContext, useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { SpeakerItem } from "../SpeakerItem";
-import { AuthUser } from "../../pages/_app";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { authUserSelector } from "../../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 // 話す人一覧画面コンポーネント
 export const Speakers: React.VFC = memo(() => {
-  // firestore から topics データ取得
-  const authUser: AuthUser = useContext(AuthUserContext);
+  // firestore から speakers データ取得
+  const authUser = useRecoilValue(authUserSelector);
   const { speakers, getSpeakersFromFirestore } = useDbFromFirestore();
 
   useEffect(() => {

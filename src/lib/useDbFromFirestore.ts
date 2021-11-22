@@ -1,7 +1,7 @@
-import { useCallback, useState, useContext } from "react";
+import { useCallback, useState } from "react";
 import { firebaseDB } from "../firebase";
-import { AuthUser } from "../pages/_app";
-import { AuthUserContext } from "./authUserContextProvider";
+import { authUserSelector } from "../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 interface Topic {
   id: string;
@@ -18,7 +18,7 @@ interface Speaker {
 
 // Topics と Speakers 取得 hooks todo 共通化
 export const useDbFromFirestore = () => {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
   const [topics, setTopics] = useState<Array<Topic>>([
     {
       id: "",

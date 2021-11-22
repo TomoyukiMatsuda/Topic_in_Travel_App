@@ -1,20 +1,14 @@
-import React, {
-  FormEvent,
-  memo,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
-import { AuthUser } from "../../pages/_app";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
+import React, { FormEvent, memo, useCallback, useState } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase";
+import { authUserSelector } from "../../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 // 話す人を登録するフォームのコンポーネント
 export const RegisterSpeaker: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const [speaker, setSpeaker] = useState<string>();
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
 
   // todo hooks化
   const createTopic = useCallback(

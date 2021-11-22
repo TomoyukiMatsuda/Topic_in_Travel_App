@@ -1,28 +1,18 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect,
-  memo,
-  useContext,
-} from "react";
+import React, { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
-import { AuthUser } from "../../pages/_app";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 import { useRecoilValue } from "recoil";
-import { authUserState } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUserState";
 
 export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
   const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
     useDbFromFirestore();
-
-  const recoilUser = useRecoilValue(authUserState);
 
   // 話題切り替え時に表示を初期化
   useEffect(() => {
@@ -89,7 +79,6 @@ export const Main: React.VFC = memo(() => {
           {isShowSpeaker ? "話す人OFF" : "話す人ON"}
         </MainButton>
       )}
-      <div>{recoilUser.name === "" ? "未ログイン" : recoilUser.name}</div>
     </div>
   );
 });

@@ -1,8 +1,7 @@
 import "tailwindcss/tailwind.css";
 import React, { useEffect, useReducer } from "react";
 import { AppProps } from "next/app";
-import { AuthUserContext } from "src/lib/authUserContextProvider";
-import { RecoilRoot, useResetRecoilState, useSetRecoilState } from "recoil";
+import { RecoilRoot } from "recoil";
 import { firebaseAuth } from "../firebase";
 
 // todo 削除する
@@ -74,13 +73,10 @@ function App({ Component, pageProps }: AppProps) {
     return () => sub();
   }, [dispatch]);
 
-  // todo: context廃止する
   return (
-    <AuthUserContext.Provider value={state}>
-      <RecoilRoot>
-        <Component {...pageProps} />
-      </RecoilRoot>
-    </AuthUserContext.Provider>
+    <RecoilRoot>
+      <Component {...pageProps} />
+    </RecoilRoot>
   );
 }
 

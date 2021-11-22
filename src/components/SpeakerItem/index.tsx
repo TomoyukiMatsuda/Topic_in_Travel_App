@@ -1,8 +1,8 @@
-import React, { memo, useCallback, useContext } from "react";
+import React, { memo, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
-import { AuthUser } from "../../pages/_app";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { authUserSelector } from "../../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 interface Props {
   id: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const SpeakerItem: React.VFC<Props> = memo((props) => {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
 
   const deleteSpeaker = useCallback(() => {
     // 該当ユーザーが登録したスピーカーでないと削除できない todo エラーハンドリング

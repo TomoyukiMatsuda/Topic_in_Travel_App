@@ -1,20 +1,14 @@
-import React, {
-  memo,
-  FormEvent,
-  useState,
-  useCallback,
-  useContext,
-} from "react";
+import React, { memo, FormEvent, useState, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
-import { AuthUser } from "../../pages/_app";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
+import { authUserSelector } from "../../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 // トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい
 export const RegisterTopic: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const [topic, setTopic] = useState<string>();
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
 
   // todo hooks化
   const createTopic = useCallback(
