@@ -15,7 +15,7 @@ export const authUserActions: AuthUserActions = {
         (user: firebase.User) => {
           set(authUserState, {
             id: user.uid,
-            isAdmin: user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL, // email でAdmin ユーザーかどうかを判別
+            isAdmin: user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL, // email で Admin ユーザーかどうかを判別
             name: user.displayName || "",
             email: user.email || "",
           });

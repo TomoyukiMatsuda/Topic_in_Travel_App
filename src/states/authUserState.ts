@@ -1,11 +1,5 @@
 import { atom, selector } from "recoil";
-
-export interface AuthUser {
-  id: string;
-  isAdmin: boolean;
-  name: string;
-  email: string;
-}
+import { AuthUser } from "../types/AuthUser";
 
 // todo: keyを別ファイルで管理
 export const authUserState = atom<AuthUser>({
