@@ -1,8 +1,8 @@
-import React, { memo, useCallback, useContext } from "react";
+import React, { memo, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
-import { AuthUser } from "../../types/AuthUser";
+import { useRecoilValue } from "recoil";
+import { authUserSelector } from "../../states/authUserState";
 
 interface Props {
   id: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const TopicItem: React.VFC<Props> = memo((props) => {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
 
   // todo 削除前に確認ダイアログ表示させたい
   const deleteTopic = useCallback(() => {

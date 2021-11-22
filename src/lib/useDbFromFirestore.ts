@@ -1,7 +1,7 @@
-import { useCallback, useState, useContext } from "react";
+import { useCallback, useState } from "react";
 import { firebaseDB } from "../firebase";
-import { AuthUserContext } from "./authUserContextProvider";
-import { AuthUser } from "../types/AuthUser";
+import { authUserSelector } from "../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 // todo: timestamp: any型を避けたい
 interface Topic {
@@ -19,7 +19,8 @@ interface Speaker {
 
 // Topics と Speakers 取得 hooks todo 共通化
 export const useDbFromFirestore = () => {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
+
   // todo: 初期化方法これで良い？
   const [topics, setTopics] = useState<Array<Topic>>([
     {

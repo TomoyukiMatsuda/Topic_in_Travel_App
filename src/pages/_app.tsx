@@ -1,52 +1,13 @@
 import "tailwindcss/tailwind.css";
-import React, { useEffect, useReducer } from "react";
-import { useListenAuthUserState } from "../lib/useListenAuthUserState";
+import React from "react";
 import { AppProps } from "next/app";
-import { AuthUserContext } from "src/lib/authUserContextProvider";
-import { AuthUser } from "src/types/AuthUser";
-
-interface UserAction {
-  type: string;
-  payload: AuthUser;
-}
-
-const initialState = {
-  id: "",
-  isAdmin: false,
-  name: "",
-  email: "",
-} as AuthUser;
-
-// todo 型定義
-const reducer = (state: AuthUser, action: UserAction) => {
-  switch (action.type) {
-    case "login":
-      if (action?.payload) {
-        return action.payload;
-      } else {
-        return initialState;
-      }
-    case "logout":
-      return initialState;
-    default:
-      return state;
-  }
-};
+import { RecoilRoot } from "recoil";
 
 function App({ Component, pageProps }: AppProps) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    // Firebase のログインユーザー情報の変更を監視、検知する
-    const unSubscription = useListenAuthUserState(dispatch);
-    // ログインユーザー監視をアンマウントのタイミングで解除
-    return () => unSubscription();
-  }, [dispatch]);
-
   return (
-    <AuthUserContext.Provider value={state}>
+    <RecoilRoot>
       <Component {...pageProps} />
-    </AuthUserContext.Provider>
+    </RecoilRoot>
   );
 }
 

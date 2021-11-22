@@ -1,22 +1,16 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect,
-  memo,
-  useContext,
-} from "react";
+import React, { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
-import { AuthUser } from "../../types/AuthUser";
+import { useRecoilValue } from "recoil";
+import { authUserSelector } from "../../states/authUserState";
 
 export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
   const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
     useDbFromFirestore();
 

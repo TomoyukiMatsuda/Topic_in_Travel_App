@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import { AuthUserContext } from "src/lib/authUserContextProvider";
+import React from "react";
 import { PageTemplate } from "../components/PageTemplate";
 import { RegisterSpeaker } from "../components/RegisterSpeaker";
 import { Speakers } from "../components/Speakers";
-import { AuthUser } from "../types/AuthUser";
+import { useRecoilValue } from "recoil";
+import { authUserSelector } from "../states/authUserState";
 
 export default function RegisterSpeakerPage() {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
 
   return (
     <PageTemplate>

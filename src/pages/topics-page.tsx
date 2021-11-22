@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { RegisterTopic } from "../components/RegisterTopic";
 import { Topics } from "../components/Topics";
-import { AuthUserContext } from "src/lib/authUserContextProvider";
 import { PageTemplate } from "../components/PageTemplate";
-import { AuthUser } from "../types/AuthUser";
+import { authUserSelector } from "../states/authUserState";
+import { useRecoilValue } from "recoil";
 
 export default function TopicsPage() {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
 
   return (
     <PageTemplate>

@@ -1,10 +1,11 @@
-import React, { memo, useContext } from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import { useGoogleAuth } from "../../lib/useGoogleAuth";
-import { AuthUserContext } from "../../lib/authUserContextProvider";
-import { AuthUser } from "../../types/AuthUser";
+import { useRecoilValue } from "recoil";
+import { authUserSelector } from "../../states/authUserState";
 
 interface Props {
+  // todo propsで渡す必要なさそう
   pathname: string;
 }
 
@@ -30,7 +31,7 @@ const decideItemColor = (href: string, pathname: string): string => {
 };
 
 export const Footer: React.VFC<Props> = memo((props) => {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useRecoilValue(authUserSelector);
   const { signInGoogle, signOutGoogle } = useGoogleAuth();
 
   return (
