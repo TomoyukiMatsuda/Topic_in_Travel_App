@@ -1,8 +1,10 @@
-import React, { memo, ReactNode, useState } from "react";
+import React, { memo, ReactNode, useEffect, useState } from "react";
 import Head from "next/head";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { useRouter } from "next/router";
+import { firebaseAuth } from "../../firebase";
+import { authUserActions } from "../../states/authUserActions";
 
 interface Props {
   children: ReactNode;
@@ -25,6 +27,16 @@ const headerTitle = (path: string): string => {
 // ページのベースとなるテンプレートコンポーネント
 export const PageTemplate: React.VFC<Props> = memo((props) => {
   const router = useRouter();
+  const setAuthUser = authUserActions.useSetAuthUser();
+  const resetAuthUser = authUserActions.useResetAuthUser();
+
+  useEffect(() => {
+    // TODO: ユーザー監視処理はここで良い？
+    const subscription = firebaseAuth.onAuthStateChanged((user) => {
+      user ? setAuthUser(user) : resetAuthUser();
+    });
+    return subscription;
+  }, []);
 
   return (
     <div className="flex flex-col h-screen">

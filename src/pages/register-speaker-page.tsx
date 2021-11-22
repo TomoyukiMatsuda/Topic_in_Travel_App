@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { AuthUserContext } from "src/lib/authUserContextProvider";
 import { PageTemplate } from "../components/PageTemplate";
-import { AuthUser } from "./_app";
 import { RegisterSpeaker } from "../components/RegisterSpeaker";
 import { Speakers } from "../components/Speakers";
 
 export default function RegisterSpeakerPage() {
-  const authUser: AuthUser = useContext(AuthUserContext);
+  const authUser = useContext(AuthUserContext);
 
   return (
     <PageTemplate>
