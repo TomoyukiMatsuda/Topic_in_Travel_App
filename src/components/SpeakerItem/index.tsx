@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
-import { authUserSelector } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
 
 interface Props {

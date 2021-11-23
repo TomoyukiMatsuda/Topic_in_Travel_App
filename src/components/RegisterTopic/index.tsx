@@ -1,7 +1,7 @@
 import React, { memo, FormEvent, useState, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
-import { authUserSelector } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
 
 // トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい
@@ -42,6 +42,7 @@ export const RegisterTopic: React.VFC = memo(() => {
 
   return (
     <div>
+      {/*todo: ラベルクリックでフォーム入力にフォーカスされるように修正する*/}
       <form className="px-8 pt-6" onSubmit={createTopic}>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           NEW トピック

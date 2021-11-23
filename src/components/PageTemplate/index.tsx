@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { useRouter } from "next/router";
 import { firebaseAuth } from "../../firebase";
-import { authUserActions } from "../../states/authUserActions";
+import { authUserActions } from "../../states/authUser/authUserActions";
 
 interface Props {
   children: ReactNode;

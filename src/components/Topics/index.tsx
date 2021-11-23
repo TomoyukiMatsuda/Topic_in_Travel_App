@@ -1,22 +1,17 @@
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import { TopicItem } from "../TopicItem";
-import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
+import { useRecoilValue } from "recoil";
+import { topicsSelector } from "../../states/topics/topicsState";
+import { useFetchTopics } from "../../hooks/useFetchTopics";
 
 // 話題一覧画面コンポーネント
 export const Topics: React.VFC = memo(() => {
-  // firestore から topics データ取得
-  const { topics, getTopicsFromFirestore } = useDbFromFirestore();
-
-  useEffect(() => {
-    // Firestoreからトピックデータをゲット
-    const unSubscribe = getTopicsFromFirestore();
-    // Firestore の DB情報更新の検知を解除
-    return () => unSubscribe();
-  }, [getTopicsFromFirestore]);
+  useFetchTopics();
+  const topics = useRecoilValue(topicsSelector);
 
   return (
     <div>
-      {topics[0]?.id && (
+      {!!topics.length && (
         <div className="px-5">
           {topics.map((topic) => {
             return (

@@ -1,18 +1,23 @@
 import React, { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
-import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
+import { useFetchSpeakers } from "../../hooks/useFetchSpeakers";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 import { useRecoilValue } from "recoil";
-import { authUserSelector } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUser/authUserState";
+import { topicsSelector } from "../../states/topics/topicsState";
+import { useFetchTopics } from "../../hooks/useFetchTopics";
 
 export const Main: React.VFC = memo(() => {
+  useFetchTopics();
+  const [topics, authUser] = [
+    useRecoilValue(topicsSelector),
+    useRecoilValue(authUserSelector),
+  ];
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
-  const authUser = useRecoilValue(authUserSelector);
-  const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
-    useDbFromFirestore();
+  const { getSpeakersFromFirestore, speakers } = useFetchSpeakers();
 
   // 話題切り替え時に表示を初期化
   useEffect(() => {
@@ -25,13 +30,11 @@ export const Main: React.VFC = memo(() => {
 
   // Firestore からトピックスを取得
   useEffect(() => {
-    const getTopicsUnSubscribe = getTopicsFromFirestore();
     const getSpeakersUnSubscribe = getSpeakersFromFirestore();
     return () => {
-      getTopicsUnSubscribe();
       getSpeakersUnSubscribe();
     };
-  }, [getTopicsFromFirestore, getSpeakersFromFirestore, authUser]);
+  }, [getSpeakersFromFirestore, authUser]);
 
   // todo シャッフル確率最適化 一回表示対象となった場合配列をから要素を削除することを検討する
   //  https://qiita.com/pure-adachi/items/77fdf665ff6e5ea22128
@@ -70,6 +73,7 @@ export const Main: React.VFC = memo(() => {
           : `なにを？： ${topicLabel}`}
       </ShuffleLabel>
 
+      {/*todo ローディング中はdisableにしたい*/}
       <MainButton color="blue" onClickFunc={onClickShuffle}>
         ぷっしゅ
       </MainButton>
