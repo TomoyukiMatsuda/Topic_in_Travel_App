@@ -4,7 +4,8 @@ import { authUserSelector } from "../states/authUserState";
 import { useRecoilValue } from "recoil";
 
 // todo: timestamp: any型を避けたい
-interface Topic {
+
+export interface Topic {
   id: string;
   content: string;
   timestamp: any;
