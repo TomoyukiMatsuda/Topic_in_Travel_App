@@ -5,13 +5,17 @@ import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../../states/authUser/authUserState";
+import { topicsSelector } from "../../states/topics/topicsState";
 
 export const Main: React.VFC = memo(() => {
+  const [topics, authUser] = [
+    useRecoilValue(topicsSelector),
+    useRecoilValue(authUserSelector),
+  ];
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
-  const authUser = useRecoilValue(authUserSelector);
-  const { topics, getSpeakersFromFirestore, speakers } = useDbFromFirestore();
+  const { getSpeakersFromFirestore, speakers } = useDbFromFirestore();
 
   // 話題切り替え時に表示を初期化
   useEffect(() => {
@@ -67,6 +71,7 @@ export const Main: React.VFC = memo(() => {
           : `なにを？： ${topicLabel}`}
       </ShuffleLabel>
 
+      {/*todo ローディング中はdisableにしたい*/}
       <MainButton color="blue" onClickFunc={onClickShuffle}>
         ぷっしゅ
       </MainButton>

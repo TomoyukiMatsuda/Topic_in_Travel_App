@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { firebaseDB } from "../firebase";
 import { authUserSelector } from "../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
-import { topicsAtom } from "../states/topics/topicsState";
+import { topicsSelector } from "../states/topics/topicsState";
 import { topicsActions } from "../states/topics/topicsActions";
 
 // todo: timestamp: any型を避けたい
@@ -22,7 +22,7 @@ interface Speaker {
 // Topics と Speakers 取得 hooks todo topics と speakers 分けたい
 export const useDbFromFirestore = () => {
   const authUser = useRecoilValue(authUserSelector);
-  const topics = useRecoilValue(topicsAtom);
+  const topics = useRecoilValue(topicsSelector);
   const setTopics = topicsActions.useSetTopics();
 
   const [speakers, setSpeakers] = useState<Array<Speaker>>([
@@ -55,6 +55,7 @@ export const useDbFromFirestore = () => {
     // todo ユーザーに紐づいたtopicsだけをゲットできるようにしたい
 
     if (!topics.length) {
+      // todo エラーハンドリング / ローディングハンドリング
       // todo キャッシュある時 && DBに変更ない時 はゲット処理不要としたい
       firebaseDB
         .collection("topics")
@@ -63,12 +64,11 @@ export const useDbFromFirestore = () => {
         .then((snapshot) => {
           setTopics(snapshot.docs);
         })
-        .catch((e) => console.log(e)); // todo エラーハンドリング
-      console.log("false", topics.length);
+        .catch((e) => console.log(e));
     }
 
     // todo 依存配列をどうするか 再フェッチとか
   }, []);
 
-  return { topics, getSpeakersFromFirestore, speakers };
+  return { getSpeakersFromFirestore, speakers };
 };
