@@ -5,6 +5,7 @@ import { Footer } from "../Footer";
 import { useRouter } from "next/router";
 import { firebaseAuth } from "../../firebase";
 import { authUserActions } from "../../states/authUser/authUserActions";
+import { speakersActions } from "../../states/speakers/speakersActions";
 
 interface Props {
   children: ReactNode;
@@ -27,15 +28,24 @@ const headerTitle = (path: string): string => {
 // ページのベースとなるテンプレートコンポーネント
 export const PageTemplate: React.VFC<Props> = memo((props) => {
   const router = useRouter();
-  const setAuthUser = authUserActions.useSetAuthUser();
-  const resetAuthUser = authUserActions.useResetAuthUser();
+  const [setAuthUser, resetAuthUser, resetSpeakers] = [
+    authUserActions.useSetAuthUser(),
+    authUserActions.useResetAuthUser(),
+    speakersActions.useResetSpeakers(),
+  ];
 
   useEffect(() => {
-    // TODO: ユーザー監視処理はここで良い？
-    const subscription = firebaseAuth.onAuthStateChanged((user) => {
-      user ? setAuthUser(user) : resetAuthUser();
+    // TODO: ユーザー監視処理はここで良い？ useGoogleAuthの中でも同様にできそう
+    const unSubscription = firebaseAuth.onAuthStateChanged((user) => {
+      if (user !== null) {
+        setAuthUser(user);
+      } else {
+        resetAuthUser();
+        resetSpeakers();
+      }
     });
-    return subscription;
+
+    return () => unSubscription();
   }, []);
 
   return (

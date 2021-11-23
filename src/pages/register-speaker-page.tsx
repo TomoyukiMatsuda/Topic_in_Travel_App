@@ -17,7 +17,7 @@ export default function RegisterSpeakerPage() {
         </div>
       ) : (
         // todo ログインしていないときの表示を修正
-        "ログインしてね、ログインすると話す人を登録できるよ"
+        "ログインすると話す人を登録できるよ"
       )}
       {/*todo 登録した話す人一覧を表示*/}
       <Speakers />

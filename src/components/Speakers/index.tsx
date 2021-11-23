@@ -1,26 +1,17 @@
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import { useFetchSpeakers } from "../../hooks/useFetchSpeakers";
 import { SpeakerItem } from "../SpeakerItem";
-import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
+import { speakersSelector } from "../../states/speakers/speakersState";
 
 // 話す人一覧画面コンポーネント
 export const Speakers: React.VFC = memo(() => {
-  // firestore から speakers データ取得
-  const authUser = useRecoilValue(authUserSelector);
-  const { speakers, getSpeakersFromFirestore } = useFetchSpeakers();
+  useFetchSpeakers();
+  const speakers = useRecoilValue(speakersSelector);
 
-  useEffect(() => {
-    // Firestoreからspeakerデータをゲット
-    const unSubscribe = getSpeakersFromFirestore();
-    // Firestore の DB情報更新の検知を解除
-    return () => unSubscribe();
-  }, [getSpeakersFromFirestore, authUser]);
-
-  // todo ログインユーザーと紐づいた話す人だけを表示させたい
   return (
     <div>
-      {speakers[0]?.id && (
+      {!!speakers.length && (
         <div className="px-5">
           {speakers.map((speaker) => {
             console.log(speaker);
