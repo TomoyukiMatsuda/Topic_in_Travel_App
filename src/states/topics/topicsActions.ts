@@ -22,12 +22,14 @@ export const topicsActions: TopicsActions = {
               content: doc.data().topic,
               timestamp: doc.data().timestamp,
             }))
-          )
+          ),
+      []
     ),
   useResetTopics: () =>
     useRecoilCallback(
       ({ reset }) =>
         () =>
-          reset(topicsAtom)
+          reset(topicsAtom),
+      []
     ),
 };

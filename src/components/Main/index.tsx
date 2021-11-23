@@ -7,34 +7,27 @@ import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { topicsSelector } from "../../states/topics/topicsState";
 import { useFetchTopics } from "../../hooks/useFetchTopics";
+import { speakersSelector } from "../../states/speakers/speakersState";
 
 export const Main: React.VFC = memo(() => {
   useFetchTopics();
-  const [topics, authUser] = [
+  useFetchSpeakers();
+  const [topics, speakers, authUser] = [
     useRecoilValue(topicsSelector),
+    useRecoilValue(speakersSelector),
     useRecoilValue(authUserSelector),
   ];
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
-  const { getSpeakersFromFirestore, speakers } = useFetchSpeakers();
 
   // 話題切り替え時に表示を初期化
-  useEffect(() => {
-    setTopicLabel("なにをやねん");
-  }, [setTopicLabel, setSpeaker, authUser]);
+  useEffect(
+    () => setTopicLabel("なにをやねん"),
+    [setTopicLabel, setSpeaker, authUser]
+  );
 
-  useEffect(() => {
-    setSpeaker("だれがやねん");
-  }, [authUser, setSpeaker]);
-
-  // Firestore からトピックスを取得
-  useEffect(() => {
-    const getSpeakersUnSubscribe = getSpeakersFromFirestore();
-    return () => {
-      getSpeakersUnSubscribe();
-    };
-  }, [getSpeakersFromFirestore, authUser]);
+  useEffect(() => setSpeaker("だれがやねん"), [authUser, setSpeaker]);
 
   // todo シャッフル確率最適化 一回表示対象となった場合配列をから要素を削除することを検討する
   //  https://qiita.com/pure-adachi/items/77fdf665ff6e5ea22128

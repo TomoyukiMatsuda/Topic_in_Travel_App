@@ -23,12 +23,14 @@ export const speakersActions: SpeakersActions = {
               name: doc.data().name,
               timestamp: doc.data().timestamp,
             }))
-          )
+          ),
+      []
     ),
   useResetSpeakers: () =>
     useRecoilCallback(
       ({ reset }) =>
         () =>
-          reset(speakersAtom)
+          reset(speakersAtom),
+      []
     ),
 };

@@ -11,7 +11,7 @@ export const RegisterSpeaker: React.VFC = memo(() => {
   const authUser = useRecoilValue(authUserSelector);
 
   // todo hooks化
-  const createTopic = useCallback(
+  const createSpeaker = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(authUser);
@@ -43,7 +43,7 @@ export const RegisterSpeaker: React.VFC = memo(() => {
 
   return (
     <div>
-      <form className="px-8 pt-6" onSubmit={createTopic}>
+      <form className="px-8 pt-6" onSubmit={createSpeaker}>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           人の名前を登録
         </label>

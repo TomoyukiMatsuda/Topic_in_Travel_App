@@ -2,7 +2,6 @@ import { useRecoilCallback } from "recoil";
 import firebase from "firebase";
 import { authUserAtom } from "./authUserState";
 
-// Recoilのstateを更新するのはactionからだけにする
 export interface AuthUserActions {
   useSetAuthUser: () => (user: firebase.User) => void;
   useResetAuthUser: () => () => void;

@@ -1,40 +1,28 @@
-import { useCallback, useState } from "react";
+import { useEffect } from "react";
 import { firebaseDB } from "../firebase";
 import { authUserSelector } from "../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
-import { Speaker } from "../types/Speaker";
+import { speakersSelector } from "../states/speakers/speakersState";
+import { speakersActions } from "../states/speakers/speakersActions";
 
-export const useFetchSpeakers = () => {
-  const authUser = useRecoilValue(authUserSelector);
+export const useFetchSpeakers = (): void => {
+  const [speakers, authUser] = [
+    useRecoilValue(speakersSelector),
+    useRecoilValue(authUserSelector),
+  ];
+  const setSpeakers = speakersActions.useSetSpeakers();
 
-  const [speakers, setSpeakers] = useState<Array<Speaker>>([
-    {
-      id: "",
-      userId: "",
-      name: "",
-      timestamp: null,
-    } as Speaker,
-  ]);
+  useEffect(() => {
+    // todo: エラー、ローディングハンドリング
+    if (!speakers.length) {
+      firebaseDB
+        .collection("speakers")
+        .where("userId", "==", authUser.id) // ログインユーザーidと紐づいたspeakerを取得
+        .get()
+        .then((snapshot) => setSpeakers(snapshot.docs))
+        .catch((e) => console.log(e));
+    }
 
-  const getSpeakersFromFirestore = useCallback(() => {
-    // todo: できれば降順で取得したい
-    return firebaseDB
-      .collection("speakers")
-      .where("userId", "==", authUser.id) // ログインユーザーidと紐づいたspeakerを取得
-      .get();
-
-    //   .then((snapshot) => );
-    // .onSnapshot((snapshot) => {
-    //   setSpeakers(
-    //     snapshot.docs.map<Speaker>((doc) => ({
-    //       id: doc.id,
-    //       userId: doc.data().userId,
-    //       name: doc.data().name,
-    //       timestamp: doc.data().timestamp,
-    //     }))
-    //   );
-    // });
-  }, [firebaseDB, authUser, setSpeakers]);
-
-  return { getSpeakersFromFirestore, speakers };
+    // todo 依存配列をどうするか 再フェッチとか
+  }, [authUser]);
 };
