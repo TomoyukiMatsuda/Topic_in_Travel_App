@@ -1,10 +1,10 @@
 import React, { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
-import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
+import { useDbFromFirestore } from "../../hooks/useDbFromFirestore";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 import { useRecoilValue } from "recoil";
-import { authUserSelector } from "../../states/authUser/authUserAtom";
+import { authUserSelector } from "../../states/authUser/authUserState";
 
 export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");

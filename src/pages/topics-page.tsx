@@ -2,7 +2,7 @@ import React from "react";
 import { RegisterTopic } from "../components/RegisterTopic";
 import { Topics } from "../components/Topics";
 import { PageTemplate } from "../components/PageTemplate";
-import { authUserSelector } from "../states/authUser/authUserAtom";
+import { authUserSelector } from "../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
 
 export default function TopicsPage() {

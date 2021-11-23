@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { TopicItem } from "../TopicItem";
-import { Topic, useDbFromFirestore } from "../../lib/useDbFromFirestore";
+import { Topic, useDbFromFirestore } from "../../hooks/useDbFromFirestore";
 import { firebaseDB } from "../../firebase";
 
 // 話題一覧画面コンポーネント
@@ -11,6 +11,7 @@ export const Topics: React.VFC = memo(() => {
   const [db, setDb] = useState<Topic[] | null>(null);
 
   useEffect(() => {
+    // todo ユーザーに紐づいたtopicsだけをゲットしたい
     firebaseDB
       .collection("topics")
       .orderBy("timestamp", "desc")
@@ -31,8 +32,6 @@ export const Topics: React.VFC = memo(() => {
     // Firestore の DB情報更新の検知を解除
     return () => unSubscribe();
   }, [getTopicsFromFirestore]);
-
-  console.log(db);
 
   return (
     <div>

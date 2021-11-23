@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { Topic } from "../../lib/useDbFromFirestore";
+import { Topic } from "../../hooks/useDbFromFirestore";
 
 // todo: keyを別ファイルで管理
 export const topicsAtom = atom<Topic[]>({

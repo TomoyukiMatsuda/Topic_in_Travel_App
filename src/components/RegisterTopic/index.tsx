@@ -1,7 +1,7 @@
 import React, { memo, FormEvent, useState, useCallback } from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
-import { authUserSelector } from "../../states/authUser/authUserAtom";
+import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
 
 // トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい

@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 import firebase from "firebase";
-import { authUserState } from "./authUserAtom";
+import { authUserAtom } from "./authUserState";
 
 // Recoilのstateを更新するのはactionからだけにする
 export interface AuthUserActions {
@@ -13,7 +13,7 @@ export const authUserActions: AuthUserActions = {
     useRecoilCallback(
       ({ set }) =>
         (user: firebase.User) => {
-          set(authUserState, {
+          set(authUserAtom, {
             id: user.uid,
             isAdmin: user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL, // email で Admin ユーザーかどうかを判別
             name: user.displayName || "",
@@ -26,7 +26,7 @@ export const authUserActions: AuthUserActions = {
     useRecoilCallback(
       ({ reset }) =>
         () =>
-          reset(authUserState),
+          reset(authUserAtom),
       []
     ),
 };

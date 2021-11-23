@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { firebaseDB } from "../firebase";
-import { authUserSelector } from "../states/authUser/authUserAtom";
+import { authUserSelector } from "../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
 
 // todo: timestamp: any型を避けたい
