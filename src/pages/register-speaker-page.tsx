@@ -3,7 +3,7 @@ import { PageTemplate } from "../components/PageTemplate";
 import { RegisterSpeaker } from "../components/RegisterSpeaker";
 import { Speakers } from "../components/Speakers";
 import { useRecoilValue } from "recoil";
-import { authUserSelector } from "../states/authUserState";
+import { authUserSelector } from "../states/authUser/authUserAtom";
 
 export default function RegisterSpeakerPage() {
   const authUser = useRecoilValue(authUserSelector);

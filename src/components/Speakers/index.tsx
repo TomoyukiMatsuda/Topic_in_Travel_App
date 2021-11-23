@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from "react";
 import { useDbFromFirestore } from "../../lib/useDbFromFirestore";
 import { SpeakerItem } from "../SpeakerItem";
-import { authUserSelector } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUser/authUserAtom";
 import { useRecoilValue } from "recoil";
 
 // 話す人一覧画面コンポーネント

@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 import firebase from "firebase";
-import { authUserState } from "./authUserState";
+import { authUserState } from "./authUserAtom";
 
 // Recoilのstateを更新するのはactionからだけにする
 export interface AuthUserActions {

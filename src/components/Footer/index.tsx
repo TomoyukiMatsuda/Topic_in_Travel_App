@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import Link from "next/link";
 import { useGoogleAuth } from "../../lib/useGoogleAuth";
 import { useRecoilValue } from "recoil";
-import { authUserSelector } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUser/authUserAtom";
 
 interface Props {
   // todo propsで渡す必要なさそう

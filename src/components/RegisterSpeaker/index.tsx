@@ -1,6 +1,6 @@
 import React, { FormEvent, memo, useCallback, useState } from "react";
 import { firebaseDB } from "../../firebase";
-import { authUserSelector } from "../../states/authUserState";
+import { authUserSelector } from "../../states/authUser/authUserAtom";
 import { useRecoilValue } from "recoil";
 import firebase from "firebase";
 
