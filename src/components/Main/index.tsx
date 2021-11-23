@@ -1,13 +1,15 @@
 import React, { useCallback, useState, useEffect, memo } from "react";
 import Head from "next/head";
-import { useDbFromFirestore } from "../../hooks/useDbFromFirestore";
+import { useFetchSpeakers } from "../../hooks/useFetchSpeakers";
 import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { topicsSelector } from "../../states/topics/topicsState";
+import { useFetchTopics } from "../../hooks/useFetchTopics";
 
 export const Main: React.VFC = memo(() => {
+  useFetchTopics();
   const [topics, authUser] = [
     useRecoilValue(topicsSelector),
     useRecoilValue(authUserSelector),
@@ -15,7 +17,7 @@ export const Main: React.VFC = memo(() => {
   const [topicLabel, setTopicLabel] = useState("なにをやねん");
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
-  const { getSpeakersFromFirestore, speakers } = useDbFromFirestore();
+  const { getSpeakersFromFirestore, speakers } = useFetchSpeakers();
 
   // 話題切り替え時に表示を初期化
   useEffect(() => {

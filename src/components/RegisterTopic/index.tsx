@@ -42,6 +42,7 @@ export const RegisterTopic: React.VFC = memo(() => {
 
   return (
     <div>
+      {/*todo: ラベルクリックでフォーム入力にフォーカスされるように修正する*/}
       <form className="px-8 pt-6" onSubmit={createTopic}>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           NEW トピック

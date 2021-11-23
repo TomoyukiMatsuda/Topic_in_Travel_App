@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 import { topicsAtom } from "./topicsState";
-import { Topic } from "../../hooks/useDbFromFirestore";
 import firebase from "firebase";
+import { Topic } from "../../types/Topic";
 
 export interface TopicsActions {
   useSetTopics: () => (

@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from "react";
-import { useDbFromFirestore } from "../../hooks/useDbFromFirestore";
+import { useFetchSpeakers } from "../../hooks/useFetchSpeakers";
 import { SpeakerItem } from "../SpeakerItem";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
@@ -8,7 +8,7 @@ import { useRecoilValue } from "recoil";
 export const Speakers: React.VFC = memo(() => {
   // firestore から speakers データ取得
   const authUser = useRecoilValue(authUserSelector);
-  const { speakers, getSpeakersFromFirestore } = useDbFromFirestore();
+  const { speakers, getSpeakersFromFirestore } = useFetchSpeakers();
 
   useEffect(() => {
     // Firestoreからspeakerデータをゲット

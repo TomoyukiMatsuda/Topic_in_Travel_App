@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import { TopicItem } from "../TopicItem";
-import { useDbFromFirestore } from "../../hooks/useDbFromFirestore";
 import { useRecoilValue } from "recoil";
 import { topicsSelector } from "../../states/topics/topicsState";
+import { useFetchTopics } from "../../hooks/useFetchTopics";
 
 // 話題一覧画面コンポーネント
 export const Topics: React.VFC = memo(() => {
+  useFetchTopics();
   const topics = useRecoilValue(topicsSelector);
-  useDbFromFirestore();
 
   return (
     <div>
