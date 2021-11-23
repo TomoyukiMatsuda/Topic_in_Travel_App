@@ -11,8 +11,7 @@ export const Main: React.VFC = memo(() => {
   const [speaker, setSpeaker] = useState("だれがやねん");
   const [isShowSpeaker, setIsShowSpeaker] = useState(true);
   const authUser = useRecoilValue(authUserSelector);
-  const { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers } =
-    useDbFromFirestore();
+  const { topics, getSpeakersFromFirestore, speakers } = useDbFromFirestore();
 
   // 話題切り替え時に表示を初期化
   useEffect(() => {
@@ -25,13 +24,11 @@ export const Main: React.VFC = memo(() => {
 
   // Firestore からトピックスを取得
   useEffect(() => {
-    const getTopicsUnSubscribe = getTopicsFromFirestore();
     const getSpeakersUnSubscribe = getSpeakersFromFirestore();
     return () => {
-      getTopicsUnSubscribe();
       getSpeakersUnSubscribe();
     };
-  }, [getTopicsFromFirestore, getSpeakersFromFirestore, authUser]);
+  }, [getSpeakersFromFirestore, authUser]);
 
   // todo シャッフル確率最適化 一回表示対象となった場合配列をから要素を削除することを検討する
   //  https://qiita.com/pure-adachi/items/77fdf665ff6e5ea22128

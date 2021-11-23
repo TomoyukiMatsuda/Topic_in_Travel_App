@@ -1,10 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { firebaseDB } from "../firebase";
 import { authUserSelector } from "../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
+import { topicsAtom } from "../states/topics/topicsState";
+import { topicsActions } from "../states/topics/topicsActions";
 
 // todo: timestamp: any型を避けたい
-
 export interface Topic {
   id: string;
   content: string;
@@ -18,18 +19,12 @@ interface Speaker {
   timestamp: any;
 }
 
-// Topics と Speakers 取得 hooks todo 共通化
+// Topics と Speakers 取得 hooks todo topics と speakers 分けたい
 export const useDbFromFirestore = () => {
   const authUser = useRecoilValue(authUserSelector);
+  const topics = useRecoilValue(topicsAtom);
+  const setTopics = topicsActions.useSetTopics();
 
-  // todo: 初期化方法これで良い？
-  const [topics, setTopics] = useState<Array<Topic>>([
-    {
-      id: "",
-      content: "",
-      timestamp: null,
-    } as Topic,
-  ]);
   const [speakers, setSpeakers] = useState<Array<Speaker>>([
     {
       id: "",
@@ -38,22 +33,6 @@ export const useDbFromFirestore = () => {
       timestamp: null,
     } as Speaker,
   ]);
-
-  // todo: snapshot をやめて 取得→グローバルステートに更新で、更新処理を走らせたいタイミングで再度取得処理にする？
-  const getTopicsFromFirestore = useCallback(() => {
-    return firebaseDB
-      .collection("topics")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setTopics(
-          snapshot.docs.map<Topic>((doc) => ({
-            id: doc.id,
-            content: doc.data().topic,
-            timestamp: doc.data().timestamp,
-          }))
-        );
-      });
-  }, [firebaseDB, setTopics]);
 
   const getSpeakersFromFirestore = useCallback(() => {
     // todo: できれば降順で取得したい
@@ -72,5 +51,24 @@ export const useDbFromFirestore = () => {
       });
   }, [firebaseDB, authUser, setSpeakers]);
 
-  return { getTopicsFromFirestore, topics, getSpeakersFromFirestore, speakers };
+  useEffect(() => {
+    // todo ユーザーに紐づいたtopicsだけをゲットできるようにしたい
+
+    if (!topics.length) {
+      // todo キャッシュある時 && DBに変更ない時 はゲット処理不要としたい
+      firebaseDB
+        .collection("topics")
+        .orderBy("timestamp", "desc")
+        .get()
+        .then((snapshot) => {
+          setTopics(snapshot.docs);
+        })
+        .catch((e) => console.log(e)); // todo エラーハンドリング
+      console.log("false", topics.length);
+    }
+
+    // todo 依存配列をどうするか 再フェッチとか
+  }, []);
+
+  return { topics, getSpeakersFromFirestore, speakers };
 };
