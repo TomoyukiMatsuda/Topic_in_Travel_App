@@ -21,16 +21,19 @@ export const useFetchSpeakers = () => {
     return firebaseDB
       .collection("speakers")
       .where("userId", "==", authUser.id) // ログインユーザーidと紐づいたspeakerを取得
-      .onSnapshot((snapshot) => {
-        setSpeakers(
-          snapshot.docs.map<Speaker>((doc) => ({
-            id: doc.id,
-            userId: doc.data().userId,
-            name: doc.data().name,
-            timestamp: doc.data().timestamp,
-          }))
-        );
-      });
+      .get();
+
+    //   .then((snapshot) => );
+    // .onSnapshot((snapshot) => {
+    //   setSpeakers(
+    //     snapshot.docs.map<Speaker>((doc) => ({
+    //       id: doc.id,
+    //       userId: doc.data().userId,
+    //       name: doc.data().name,
+    //       timestamp: doc.data().timestamp,
+    //     }))
+    //   );
+    // });
   }, [firebaseDB, authUser, setSpeakers]);
 
   return { getSpeakersFromFirestore, speakers };

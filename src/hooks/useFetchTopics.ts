@@ -18,9 +18,7 @@ export const useFetchTopics = (): void => {
         .collection("topics")
         .orderBy("timestamp", "desc")
         .get()
-        .then((snapshot) => {
-          setTopics(snapshot.docs);
-        })
+        .then((snapshot) => setTopics(snapshot.docs))
         .catch((e) => console.log(e));
     }
 
