@@ -19,7 +19,6 @@ export default function RegisterSpeakerPage() {
         // todo ログインしていないときの表示を修正
         "ログインすると話す人を登録できるよ"
       )}
-      {/*todo 登録した話す人一覧を表示*/}
       <Speakers />
     </PageTemplate>
   );

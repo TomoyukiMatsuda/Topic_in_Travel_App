@@ -1,5 +1,5 @@
 import { useRecoilCallback } from "recoil";
-import { topicsAtom } from "./topicsState";
+import { topicsAtom, topicsSelector } from "./topicsState";
 import firebase from "firebase";
 import { Topic } from "../../types/Topic";
 
@@ -7,6 +7,7 @@ export interface TopicsActions {
   useSetTopics: () => (
     topicDocs: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>[]
   ) => void;
+  useDeleteTopic: () => (topicId: string) => void;
   useResetTopics: () => () => void;
 }
 
@@ -23,6 +24,18 @@ export const topicsActions: TopicsActions = {
               timestamp: doc.data().timestamp,
             }))
           ),
+      []
+    ),
+  useDeleteTopic: () =>
+    useRecoilCallback(
+      ({ set, snapshot }) =>
+        (topicId) => {
+          const filteredTopics = snapshot
+            .getLoadable<Topic[]>(topicsSelector)
+            .getValue()
+            .filter((value) => value.id !== topicId);
+          set(topicsAtom, filteredTopics);
+        },
       []
     ),
   useResetTopics: () =>
