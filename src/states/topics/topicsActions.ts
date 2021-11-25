@@ -33,7 +33,7 @@ export const topicsActions: TopicsActions = {
           const filteredTopics = snapshot
             .getLoadable<Topic[]>(topicsSelector)
             .getValue()
-            .filter((value) => value.id !== topicId);
+            .filter((topic) => topic.id !== topicId);
           set(topicsAtom, filteredTopics);
         },
       []

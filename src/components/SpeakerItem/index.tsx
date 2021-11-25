@@ -3,6 +3,7 @@ import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
+import { speakersActions } from "../../states/speakers/speakersActions";
 
 interface Props {
   id: string;
@@ -12,10 +13,13 @@ interface Props {
 
 export const SpeakerItem: React.VFC<Props> = memo((props) => {
   const authUser = useRecoilValue(authUserSelector);
+  // todo 命名
+  const deleteSpeakerAction = speakersActions.useDeleteSpeaker();
 
   const deleteSpeaker = useCallback(() => {
     // 該当ユーザーが登録したスピーカーでないと削除できない todo エラーハンドリング
     if (authUser.id !== props.userId) {
+      alert("削除できませんでした");
       return;
     }
 
@@ -25,11 +29,12 @@ export const SpeakerItem: React.VFC<Props> = memo((props) => {
       .delete()
       .then((data) => {
         // todo 成功時ハンドリング
-        console.log(data);
+        deleteSpeakerAction(props.id);
+        alert(`${props.name}さんを削除しました`);
       })
       .catch((error) => {
         // todo 失敗時ハンドリング
-        console.log(error);
+        alert("削除に失敗しました");
       });
   }, [props, firebaseDB]);
 

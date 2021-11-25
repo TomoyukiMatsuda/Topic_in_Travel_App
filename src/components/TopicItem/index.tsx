@@ -19,6 +19,7 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
   const deleteTopic = useCallback(() => {
     // 管理者ユーザーでなければ削除できない
     if (!authUser.isAdmin) {
+      alert("トピックを削除できません");
       return;
     }
 
