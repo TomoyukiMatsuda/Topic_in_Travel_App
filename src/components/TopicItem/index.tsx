@@ -3,6 +3,7 @@ import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../../states/authUser/authUserState";
+import { topicsActions } from "../../states/topics/topicsActions";
 
 interface Props {
   id: string;
@@ -11,25 +12,29 @@ interface Props {
 
 export const TopicItem: React.VFC<Props> = memo((props) => {
   const authUser = useRecoilValue(authUserSelector);
+  // todo 命名
+  const deleteTopicAction = topicsActions.useDeleteTopic();
 
   // todo 削除前に確認ダイアログ表示させたい
   const deleteTopic = useCallback(() => {
     // 管理者ユーザーでなければ削除できない
     if (!authUser.isAdmin) {
+      alert("トピックを削除できません");
       return;
     }
 
+    // todo 現状はapiの通信処理後にrecoilのステートを削除している。どうにかする？
     firebaseDB
       .collection("topics")
       .doc(props.id)
       .delete()
       .then((data) => {
         // todo 成功時ハンドリング
-        console.log(data);
+        deleteTopicAction(props.id);
+        alert(`「${props.content}」を削除しました`);
       })
       .catch((error) => {
-        // todo 失敗時ハンドリング
-        console.log(error);
+        alert("トピックの削除に失敗しました");
       });
   }, [props, firebaseDB]);
 
