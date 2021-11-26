@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { firebaseDB } from "../../firebase";
 import { DeleteOutline } from "@material-ui/icons";
 import { useRecoilValue } from "recoil";
@@ -15,11 +15,11 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
   // todo 命名
   const deleteTopicAction = topicsActions.useDeleteTopic();
 
-  // todo 削除前に確認ダイアログ表示させたい
+  // todo 削除前に確認ダイアログ表示させた後に削除処理実行したい
   const deleteTopic = useCallback(() => {
     // 管理者ユーザーでなければ削除できない
     if (!authUser.isAdmin) {
-      alert("トピックを削除できません");
+      console.log("トピックを削除できません");
       return;
     }
 
@@ -29,12 +29,11 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
       .doc(props.id)
       .delete()
       .then((data) => {
-        // todo 成功時ハンドリング
         deleteTopicAction(props.id);
-        alert(`「${props.content}」を削除しました`);
       })
       .catch((error) => {
         alert("トピックの削除に失敗しました");
+        console.log(error);
       });
   }, [props, firebaseDB]);
 

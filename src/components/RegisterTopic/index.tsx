@@ -1,34 +1,48 @@
-import React, { memo, FormEvent, useState, useCallback } from "react";
+import React, {
+  memo,
+  FormEvent,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
+import { topicsActions } from "../../states/topics/topicsActions";
 
 // トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい
 export const RegisterTopic: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
-  const [topic, setTopic] = useState<string>();
+  const addTopicAction = topicsActions.useAddTopic();
+  const [topic, setTopic] = useState<string>("");
   const authUser = useRecoilValue(authUserSelector);
 
   // todo hooks化
   const createTopic = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(authUser);
       if (!authUser.isAdmin) {
         // Adminユーザーでなければトピック登録できない todo エラーメッセージ
+        console.log("管理者しか登録できない");
         return;
       }
 
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
       firebaseDB
         .collection("topics")
         .add({
           topic: topic,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          timestamp: timestamp,
         })
         .then((data) => {
           // todo 成功時ハンドリング
-          console.log(data);
+          addTopicAction({
+            id: data.id,
+            // todo レスポンスのdataから内容にアクセスできないのか？
+            content: topic,
+            timestamp: timestamp,
+          });
         })
         .catch((e) => {
           // todo エラーハンドリング
