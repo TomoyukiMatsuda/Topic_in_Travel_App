@@ -3,33 +3,40 @@ import { firebaseDB } from "../../firebase";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
 import firebase from "firebase";
+import { speakersActions } from "../../states/speakers/speakersActions";
 
 // 話す人を登録するフォームのコンポーネント
-export const RegisterSpeaker: React.VFC = memo(() => {
+export const RegisterSpeakerForm: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
-  const [speaker, setSpeaker] = useState<string>();
   const authUser = useRecoilValue(authUserSelector);
+  const addSpeakerAction = speakersActions.useAddSpeaker();
+  const [speaker, setSpeaker] = useState<string>("");
 
   // todo hooks化
-  const createSpeaker = useCallback(
+  const registerSpeaker = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(authUser);
       if (!authUser.id) {
         // ログインしていなければ話す人を登録できない todo エラーメッセージ
+        console.log("管理者しか登録できない");
         return;
       }
-
+      // try catch にしたいかも
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
       firebaseDB
         .collection("speakers")
         .add({
           userId: authUser.id, // ログインユーザーidをdataに持たせる
           name: speaker,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          timestamp: timestamp,
         })
         .then((data) => {
-          // todo 成功時ハンドリング
-          console.log(data);
+          addSpeakerAction({
+            id: data.id,
+            userId: authUser.id,
+            name: speaker,
+            timestamp: timestamp,
+          });
         })
         .catch((e) => {
           // todo エラーハンドリング
@@ -43,7 +50,7 @@ export const RegisterSpeaker: React.VFC = memo(() => {
 
   return (
     <div>
-      <form className="px-8 pt-6" onSubmit={createSpeaker}>
+      <form className="px-8 pt-6" onSubmit={registerSpeaker}>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           人の名前を登録
         </label>
