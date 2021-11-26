@@ -39,13 +39,9 @@ export const speakersActions: SpeakersActions = {
     useRecoilCallback(
       ({ set, snapshot }) =>
         (speakerId) => {
-          // todo snapshot 使わずともできるかも
-          //   set(topicsAtom, (currValue) => [topic, ...currValue]);
-          const filteredSpeakers = snapshot
-            .getLoadable<Speaker[]>(speakersSelector)
-            .getValue()
-            .filter((speaker) => speaker.id !== speakerId);
-          set(speakersAtom, filteredSpeakers);
+          set(speakersAtom, (currVal) =>
+            currVal.filter((speaker) => speaker.id !== speakerId)
+          );
         },
       []
     ),

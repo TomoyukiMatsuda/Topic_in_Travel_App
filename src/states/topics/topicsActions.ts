@@ -38,13 +38,9 @@ export const topicsActions: TopicsActions = {
     useRecoilCallback(
       ({ set, snapshot }) =>
         (topicId) => {
-          // todo snapshot 使わずともできるかも
-          //   set(topicsAtom, (currValue) => [topic, ...currValue]);
-          const filteredTopics = snapshot
-            .getLoadable<Topic[]>(topicsSelector)
-            .getValue()
-            .filter((topic) => topic.id !== topicId);
-          set(topicsAtom, filteredTopics);
+          set(topicsAtom, (currVal) =>
+            currVal.filter((topic) => topic.id !== topicId)
+          );
         },
       []
     ),
