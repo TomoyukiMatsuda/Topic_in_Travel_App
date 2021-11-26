@@ -1,5 +1,5 @@
 import React from "react";
-import { RegisterTopic } from "../components/RegisterTopic";
+import { RegisterTopicForm } from "../components/RegisterTopic";
 import { Topics } from "../components/Topics";
 import { PageTemplate } from "../components/PageTemplate";
 import { authUserSelector } from "../states/authUser/authUserState";
@@ -13,7 +13,7 @@ export default function TopicsPage() {
       {authUser.isAdmin && (
         // 管理者ユーザーでなければ非表示（トピック登録できない)
         <div className="pb-4">
-          <RegisterTopic />
+          <RegisterTopicForm />
         </div>
       )}
       <Topics />

@@ -3,32 +3,39 @@ import { firebaseDB } from "../../firebase";
 import firebase from "firebase/app";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { useRecoilValue } from "recoil";
+import { topicsActions } from "../../states/topics/topicsActions";
 
 // トピック登録フォームのコンポーネント todo RegisterSpeakerと共通化したい
-export const RegisterTopic: React.VFC = memo(() => {
+export const RegisterTopicForm: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
-  const [topic, setTopic] = useState<string>();
   const authUser = useRecoilValue(authUserSelector);
+  const addTopicAction = topicsActions.useAddTopic();
+  const [topic, setTopic] = useState<string>("");
 
   // todo hooks化
-  const createTopic = useCallback(
+  const registerTopic = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(authUser);
       if (!authUser.isAdmin) {
         // Adminユーザーでなければトピック登録できない todo エラーメッセージ
+        console.log("管理者しか登録できない");
         return;
       }
 
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
       firebaseDB
         .collection("topics")
         .add({
           topic: topic,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          timestamp: timestamp,
         })
         .then((data) => {
-          // todo 成功時ハンドリング
-          console.log(data);
+          addTopicAction({
+            id: data.id,
+            // todo レスポンスのdataから内容にアクセスできないのか？
+            content: topic,
+            timestamp: timestamp,
+          });
         })
         .catch((e) => {
           // todo エラーハンドリング
@@ -43,7 +50,7 @@ export const RegisterTopic: React.VFC = memo(() => {
   return (
     <div>
       {/*todo: ラベルクリックでフォーム入力にフォーカスされるように修正する*/}
-      <form className="px-8 pt-6" onSubmit={createTopic}>
+      <form className="px-8 pt-6" onSubmit={registerTopic}>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           NEW トピック
         </label>

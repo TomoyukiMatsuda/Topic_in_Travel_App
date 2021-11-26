@@ -13,9 +13,10 @@ interface Props {
 
 export const SpeakerItem: React.VFC<Props> = memo((props) => {
   const authUser = useRecoilValue(authUserSelector);
-  // todo 命名
+  // todo 命名修正必要？
   const deleteSpeakerAction = speakersActions.useDeleteSpeaker();
 
+  // TODO: 削除前に確認ダイアログを表示させる
   const deleteSpeaker = useCallback(() => {
     // 該当ユーザーが登録したスピーカーでないと削除できない todo エラーハンドリング
     if (authUser.id !== props.userId) {
@@ -28,9 +29,7 @@ export const SpeakerItem: React.VFC<Props> = memo((props) => {
       .doc(props.id)
       .delete()
       .then((data) => {
-        // todo 成功時ハンドリング
         deleteSpeakerAction(props.id);
-        alert(`${props.name}さんを削除しました`);
       })
       .catch((error) => {
         // todo 失敗時ハンドリング

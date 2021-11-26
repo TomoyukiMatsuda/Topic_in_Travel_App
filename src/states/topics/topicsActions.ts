@@ -7,6 +7,7 @@ export interface TopicsActions {
   useSetTopics: () => (
     topicDocs: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>[]
   ) => void;
+  useAddTopic: () => (topic: Topic) => void;
   useDeleteTopic: () => (topicId: string) => void;
   useResetTopics: () => () => void;
 }
@@ -26,15 +27,20 @@ export const topicsActions: TopicsActions = {
           ),
       []
     ),
+  useAddTopic: () =>
+    useRecoilCallback(
+      ({ set }) =>
+        (topic) =>
+          set(topicsAtom, (currVal) => [topic, ...currVal]),
+      []
+    ),
   useDeleteTopic: () =>
     useRecoilCallback(
       ({ set, snapshot }) =>
         (topicId) => {
-          const filteredTopics = snapshot
-            .getLoadable<Topic[]>(topicsSelector)
-            .getValue()
-            .filter((topic) => topic.id !== topicId);
-          set(topicsAtom, filteredTopics);
+          set(topicsAtom, (currVal) =>
+            currVal.filter((topic) => topic.id !== topicId)
+          );
         },
       []
     ),

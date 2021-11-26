@@ -1,6 +1,6 @@
 import React from "react";
 import { PageTemplate } from "../components/PageTemplate";
-import { RegisterSpeaker } from "../components/RegisterSpeaker";
+import { RegisterSpeakerForm } from "../components/RegisterSpeaker";
 import { Speakers } from "../components/Speakers";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../states/authUser/authUserState";
@@ -13,7 +13,7 @@ export default function RegisterSpeakerPage() {
       {authUser.id ? (
         // ログインしてなければ非表示（話す人を登録できない)
         <div className="pb-4">
-          <RegisterSpeaker />
+          <RegisterSpeakerForm />
         </div>
       ) : (
         // todo ログインしていないときの表示を修正
