@@ -30,9 +30,8 @@ export const topicsActions: TopicsActions = {
   useAddTopic: () =>
     useRecoilCallback(
       ({ set }) =>
-        (topic) => {
-          set(topicsAtom, (currVal) => [topic, ...currVal]);
-        },
+        (topic) =>
+          set(topicsAtom, (currVal) => [topic, ...currVal]),
       []
     ),
   useDeleteTopic: () =>

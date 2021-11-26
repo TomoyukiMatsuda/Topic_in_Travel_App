@@ -7,6 +7,7 @@ export interface SpeakersActions {
   useSetSpeakers: () => (
     speakerDocs: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>[]
   ) => void;
+  useAddSpeaker: () => (speaker: Speaker) => void;
   useDeleteSpeaker: () => (speakerId: string) => void;
   useResetSpeakers: () => () => void;
 }
@@ -27,10 +28,19 @@ export const speakersActions: SpeakersActions = {
           ),
       []
     ),
+  useAddSpeaker: () =>
+    useRecoilCallback(
+      ({ set }) =>
+        (speaker) =>
+          set(speakersAtom, (currVal) => [speaker, ...currVal]),
+      []
+    ),
   useDeleteSpeaker: () =>
     useRecoilCallback(
       ({ set, snapshot }) =>
         (speakerId) => {
+          // todo snapshot 使わずともできるかも
+          //   set(topicsAtom, (currValue) => [topic, ...currValue]);
           const filteredSpeakers = snapshot
             .getLoadable<Speaker[]>(speakersSelector)
             .getValue()
