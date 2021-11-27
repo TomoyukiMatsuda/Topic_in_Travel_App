@@ -48,7 +48,7 @@ export const Main: React.VFC = memo(() => {
   }, [isShowSpeaker, setIsShowSpeaker]);
 
   return (
-    <div className="mt-5 flex flex-col">
+    <div className="flex flex-col mt-5">
       <Head>
         <title>トピックる</title>
       </Head>

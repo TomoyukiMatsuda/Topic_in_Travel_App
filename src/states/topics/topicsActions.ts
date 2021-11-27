@@ -1,5 +1,5 @@
 import { useRecoilCallback } from "recoil";
-import { topicsAtom, topicsSelector } from "./topicsState";
+import { topicsAtom } from "./topicsState";
 import firebase from "firebase";
 import { Topic } from "../../types/Topic";
 
