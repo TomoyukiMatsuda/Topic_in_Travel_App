@@ -21,6 +21,7 @@ export const PageTemplate: React.VFC<Props> = memo((props) => {
     speakersActions.useResetSpeakers(),
   ];
 
+  // TODO: hookにする？
   useEffect(() => {
     // TODO: ユーザー監視処理はここで良い？ useGoogleAuthの中でも同様にできそう
     const unSubscription = firebaseAuth.onAuthStateChanged((user) => {

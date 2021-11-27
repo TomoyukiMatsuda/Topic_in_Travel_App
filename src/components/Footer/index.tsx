@@ -9,7 +9,7 @@ interface Props {
   pathname: string;
 }
 
-const footerItems = [
+const FOOTER_ITEMS = [
   {
     href: "/",
     label: "シャッフル",
@@ -19,6 +19,7 @@ const footerItems = [
     label: "一覧",
   },
   {
+    // todo ページ名変えたい
     href: "/register-speaker-page",
     label: "話す人",
   },
@@ -35,8 +36,8 @@ export const Footer: React.VFC<Props> = memo((props) => {
   const { signInGoogle, signOutGoogle } = useGoogleAuth();
 
   return (
-    <footer className="h-12 grid grid-cols-4 text-center">
-      {footerItems.map((item) => (
+    <footer className="h-12 flex-shrink-0 grid grid-cols-4 text-center">
+      {FOOTER_ITEMS.map((item) => (
         <Link key={item.href} href={item.href}>
           <button
             className={`bg-blue-${decideItemColor(
