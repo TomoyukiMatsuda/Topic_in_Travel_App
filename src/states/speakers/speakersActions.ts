@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import { useRecoilCallback } from "recoil";
-import { speakersAtom, speakersSelector } from "./speakersState";
+import { speakersAtom } from "./speakersState";
 import { Speaker } from "../../types/Speaker";
 
 export interface SpeakersActions {

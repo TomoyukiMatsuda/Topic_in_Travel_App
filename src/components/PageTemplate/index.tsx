@@ -6,24 +6,11 @@ import { useRouter } from "next/router";
 import { firebaseAuth } from "../../firebase";
 import { authUserActions } from "../../states/authUser/authUserActions";
 import { speakersActions } from "../../states/speakers/speakersActions";
+import { pickTitle } from "../../lib/pickTitle";
 
 interface Props {
   children: ReactNode;
 }
-
-// ヘッダータイトルをページにより指定 todo useStateとかを利用した方が良い？
-const headerTitle = (path: string): string => {
-  switch (path) {
-    case "/":
-      return "シャッフル";
-    case "/topics-page":
-      return "トピック一覧";
-    case "/register-speaker-page":
-      return "会話に参加してる人を登録";
-    default:
-      return "トピックる";
-  }
-};
 
 // ページのベースとなるテンプレートコンポーネント
 export const PageTemplate: React.VFC<Props> = memo((props) => {
@@ -34,6 +21,7 @@ export const PageTemplate: React.VFC<Props> = memo((props) => {
     speakersActions.useResetSpeakers(),
   ];
 
+  // TODO: hookにする？
   useEffect(() => {
     // TODO: ユーザー監視処理はここで良い？ useGoogleAuthの中でも同様にできそう
     const unSubscription = firebaseAuth.onAuthStateChanged((user) => {
@@ -49,12 +37,12 @@ export const PageTemplate: React.VFC<Props> = memo((props) => {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col w-screen h-screen">
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <title>{headerTitle(router.pathname)}</title>
+        <title>{pickTitle(router.pathname)}</title>
       </Head>
-      <Header title={headerTitle(router.pathname)} />
+      <Header />
       <div className="flex-grow overflow-y-scroll">{props.children}</div>
       <Footer pathname={router.pathname} />
     </div>
