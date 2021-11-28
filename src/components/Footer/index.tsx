@@ -9,6 +9,7 @@ interface Props {
   pathname: string;
 }
 
+// TODO: stringToEnum() 使いたい&理解したい
 const FOOTER_ITEMS = [
   {
     href: "/",
@@ -19,8 +20,7 @@ const FOOTER_ITEMS = [
     label: "一覧",
   },
   {
-    // todo ページ名変えたい
-    href: "/register-speaker-page",
+    href: "/speakers-page",
     label: "話す人",
   },
 ];

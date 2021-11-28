@@ -5,7 +5,7 @@ import { Speakers } from "../components/Speakers";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../states/authUser/authUserState";
 
-export default function RegisterSpeakerPage() {
+export default function SpeakersPage() {
   const authUser = useRecoilValue(authUserSelector);
 
   return (
