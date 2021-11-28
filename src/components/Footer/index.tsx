@@ -3,12 +3,9 @@ import Link from "next/link";
 import { useGoogleAuth } from "../../hooks/useGoogleAuth";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../../states/authUser/authUserState";
+import { useRouter } from "next/router";
 
-interface Props {
-  // todo propsで渡す必要なさそう
-  pathname: string;
-}
-
+// TODO: stringToEnum() 使いたい&理解したい
 const FOOTER_ITEMS = [
   {
     href: "/",
@@ -19,20 +16,19 @@ const FOOTER_ITEMS = [
     label: "一覧",
   },
   {
-    // todo ページ名変えたい
-    href: "/register-speaker-page",
+    href: "/speakers-page",
     label: "話す人",
   },
 ];
 
-// フッターアイテムの色を判断 todo useStateとかを利用した方が良い？
+// フッターアイテムの色を判断
 const decideItemColor = (href: string, pathname: string): string => {
-  // パスと一致 ? 青 : 黄
   return href == pathname ? "500" : "400";
 };
 
-export const Footer: React.VFC<Props> = memo((props) => {
+export const Footer: React.VFC = memo(() => {
   const authUser = useRecoilValue(authUserSelector);
+  const router = useRouter();
   const { signInGoogle, signOutGoogle } = useGoogleAuth();
 
   return (
@@ -42,7 +38,7 @@ export const Footer: React.VFC<Props> = memo((props) => {
           <button
             className={`bg-blue-${decideItemColor(
               item.href,
-              props.pathname
+              router.pathname
             )} hover:bg-blue-300 text-white font-bold`}
           >
             <a>{item.label}</a>

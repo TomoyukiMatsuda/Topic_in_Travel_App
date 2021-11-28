@@ -44,7 +44,7 @@ export const PageTemplate: React.VFC<Props> = memo((props) => {
       </Head>
       <Header />
       <div className="flex-grow overflow-y-scroll">{props.children}</div>
-      <Footer pathname={router.pathname} />
+      <Footer />
     </div>
   );
 });
