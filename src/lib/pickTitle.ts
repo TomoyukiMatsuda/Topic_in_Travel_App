@@ -1,4 +1,4 @@
-// ヘッダータイトルをページにより指定 todo useStateとかを利用した方が良い？
+// ヘッダータイトルをページにより指定
 export const pickTitle = (path: string): string => {
   switch (path) {
     case "/":

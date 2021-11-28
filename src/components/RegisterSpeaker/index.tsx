@@ -10,7 +10,7 @@ export const RegisterSpeakerForm: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const authUser = useRecoilValue(authUserSelector);
   const addSpeakerAction = speakersActions.useAddSpeaker();
-  const [speaker, setSpeaker] = useState<string>("");
+  const [formText, setFormText] = useState<string>("");
 
   // todo hooks化
   const registerSpeaker = useCallback(
@@ -27,14 +27,14 @@ export const RegisterSpeakerForm: React.VFC = memo(() => {
         .collection("speakers")
         .add({
           userId: authUser.id, // ログインユーザーidをdataに持たせる
-          name: speaker,
+          name: formText,
           timestamp: timestamp,
         })
         .then((data) => {
           addSpeakerAction({
             id: data.id,
             userId: authUser.id,
-            name: speaker,
+            name: formText,
             timestamp: timestamp,
           });
         })
@@ -43,9 +43,9 @@ export const RegisterSpeakerForm: React.VFC = memo(() => {
           console.log(e);
         });
 
-      setSpeaker("");
+      setFormText("");
     },
-    [speaker, authUser]
+    [formText, authUser]
   );
 
   return (
@@ -57,14 +57,17 @@ export const RegisterSpeakerForm: React.VFC = memo(() => {
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="会話に参加してる人の名前を入力しよう！"
-          value={speaker}
-          onChange={(e) => setSpeaker(e.target.value)}
+          value={formText}
+          onChange={(e) => setFormText(e.target.value)}
         />
-        {/* todo フォーム入力有無でボタンの色変えたい*/}
         <button
-          className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className={`${
+            formText
+              ? "bg-yellow-500 hover:bg-yellow-400"
+              : "bg-gray-200 cursor-default"
+          } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
           type="submit"
-          disabled={!speaker}
+          disabled={!formText}
         >
           登録
         </button>

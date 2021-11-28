@@ -10,7 +10,7 @@ export const RegisterTopicForm: React.VFC = memo(() => {
   // todo: フォームバリデーション設定 / React Hook Form の利用検討
   const authUser = useRecoilValue(authUserSelector);
   const addTopicAction = topicsActions.useAddTopic();
-  const [topic, setTopic] = useState<string>("");
+  const [formText, setFormText] = useState<string>("");
 
   // todo hooks化
   const registerTopic = useCallback(
@@ -26,14 +26,14 @@ export const RegisterTopicForm: React.VFC = memo(() => {
       firebaseDB
         .collection("topics")
         .add({
-          topic: topic,
+          topic: formText,
           timestamp: timestamp,
         })
         .then((data) => {
           addTopicAction({
             id: data.id,
             // todo レスポンスのdataから内容にアクセスできないのか？
-            content: topic,
+            content: formText,
             timestamp: timestamp,
           });
         })
@@ -42,9 +42,9 @@ export const RegisterTopicForm: React.VFC = memo(() => {
           console.log(e);
         });
 
-      setTopic("");
+      setFormText("");
     },
-    [topic, authUser]
+    [formText, authUser]
   );
 
   return (
@@ -57,14 +57,17 @@ export const RegisterTopicForm: React.VFC = memo(() => {
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="例：職業を好きに選べるとしたら何を選ぶ？"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
+          value={formText}
+          onChange={(e) => setFormText(e.target.value)}
         />
-        {/* todo フォーム入力有無でボタンの色変えたい*/}
         <button
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className={`${
+            formText
+              ? "bg-blue-500 hover:bg-blue-400"
+              : "bg-gray-200 cursor-default"
+          } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
           type="submit"
-          disabled={!topic}
+          disabled={!formText}
         >
           登録
         </button>
