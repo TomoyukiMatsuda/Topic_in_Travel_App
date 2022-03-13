@@ -16,7 +16,7 @@ export const Topics: React.VFC = memo(() => {
           {topics.map((topic) => {
             return (
               <div
-                className="flex justify-between my-5 border-b-2"
+                className="flex justify-between my-5 border-b-2 px-2"
                 key={topic.id}
               >
                 <TopicItem id={topic.id} content={topic.content} />

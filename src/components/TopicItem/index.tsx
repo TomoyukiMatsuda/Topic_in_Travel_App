@@ -44,7 +44,7 @@ export const TopicItem: React.VFC<Props> = memo((props) => {
       {authUser.isAdmin && (
         // Adminユーザーでない場合は削除ボタンを非表示
         <DeleteOutline
-          className="cursor-pointer text-white bg-red-500 hover:bg-red-400"
+          className="cursor-pointer text-white bg-red-500 hover:bg-red-400 rounded-full"
           onClick={deleteTopic}
         >
           削除

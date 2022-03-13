@@ -7,8 +7,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      minWidth: {
-        700: "700px",
+      width: {
+        136: "544px",
       },
     },
   },
