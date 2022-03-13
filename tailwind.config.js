@@ -6,7 +6,11 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      minWidth: {
+        700: "700px",
+      },
+    },
   },
   variants: {
     extend: {},
