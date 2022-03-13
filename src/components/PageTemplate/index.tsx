@@ -38,7 +38,7 @@ export const PageTemplate: React.VFC<Props> = memo((props) => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col sm:w-136 h-screen shadow-lg">
+      <div className="flex flex-col sm:w-136 h-screen shadow-lg overflow-hidden">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <title>{pickTitle(router.pathname)}</title>
