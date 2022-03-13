@@ -44,7 +44,7 @@ export const PageTemplate: React.VFC<Props> = memo((props) => {
           <title>{pickTitle(router.pathname)}</title>
         </Head>
         <Header />
-        <div className="flex-grow overflow-y-scroll">{props.children}</div>
+        <div className="flex-1 overflow-y-scroll">{props.children}</div>
         <Footer />
       </div>
     </div>
