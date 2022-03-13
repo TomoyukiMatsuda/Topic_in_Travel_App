@@ -16,7 +16,7 @@ export const Speakers: React.VFC = memo(() => {
           {speakers.map((speaker) => {
             return (
               <div
-                className="flex justify-between my-5 border-b-2"
+                className="flex justify-between my-5 border-b-2 px-2"
                 key={speaker.id}
               >
                 <SpeakerItem

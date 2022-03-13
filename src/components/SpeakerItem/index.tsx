@@ -43,7 +43,7 @@ export const SpeakerItem: React.VFC<Props> = memo((props) => {
 
       {authUser.id && (
         <DeleteOutline
-          className="cursor-pointer text-white bg-red-500 hover:bg-red-400"
+          className="cursor-pointer text-white bg-red-500 hover:bg-red-400 rounded-full"
           onClick={deleteSpeaker}
         >
           削除
