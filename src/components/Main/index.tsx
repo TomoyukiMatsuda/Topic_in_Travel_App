@@ -53,17 +53,16 @@ export const Main: React.VFC = memo(() => {
         <title>トピックる</title>
       </Head>
 
+      {/*TODO: シャッフルボタン押したらスピナー表示してから表示させる*/}
       {authUser.id && isShowSpeaker && (
         // ログインしていなければスピーカー非表示
         <ShuffleLabel>
-          {speaker === "だれがやねん" ? speaker : `だれが？： ${speaker}`}
+          {speaker === "だれが？" ? speaker : `だれが？： ${speaker}`}
         </ShuffleLabel>
       )}
       {/*todo トピックの文字数が変わってもボタン位置が変わらないようにしたい*/}
       <ShuffleLabel>
-        {topicLabel === "なにをやねん"
-          ? topicLabel
-          : `なにを？： ${topicLabel}`}
+        {topicLabel === "なにを？" ? topicLabel : `なにを？： ${topicLabel}`}
       </ShuffleLabel>
 
       {/*todo ローディング中はdisableにしたい*/}
