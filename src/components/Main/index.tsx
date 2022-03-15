@@ -23,11 +23,11 @@ export const Main: React.VFC = memo(() => {
 
   // 話題切り替え時に表示を初期化
   useEffect(
-    () => setTopicLabel("なにをやねん"),
+    () => setTopicLabel("なにを？"),
     [setTopicLabel, setSpeaker, authUser]
   );
 
-  useEffect(() => setSpeaker("だれがやねん"), [authUser, setSpeaker]);
+  useEffect(() => setSpeaker("だれが？"), [authUser, setSpeaker]);
 
   // todo シャッフル確率最適化 一回表示対象となった場合配列をから要素を削除することを検討する
   //  https://qiita.com/pure-adachi/items/77fdf665ff6e5ea22128
