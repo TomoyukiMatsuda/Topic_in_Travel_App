@@ -1,15 +1,17 @@
-import React, { useCallback, useState, useEffect, memo } from "react";
+import React, { useCallback, useState, useEffect, memo, FC } from "react";
 import Head from "next/head";
 import { useFetchSpeakers } from "../../hooks/useFetchSpeakers";
-import { MainButton } from "./MainButton";
 import { ShuffleLabel } from "./ShuffleLabel";
 import { useRecoilValue } from "recoil";
 import { authUserSelector } from "../../states/authUser/authUserState";
 import { topicsSelector } from "../../states/topics/topicsState";
 import { useFetchTopics } from "../../hooks/useFetchTopics";
 import { speakersSelector } from "../../states/speakers/speakersState";
+import { Button } from "@another_works/react-landscape";
+import { Spacer } from "../../styles/spacer";
+import styled from "styled-components";
 
-export const Main: React.VFC = memo(() => {
+export const Main: FC = memo(() => {
   useFetchTopics();
   useFetchSpeakers();
   const [topics, speakers, authUser] = [
@@ -48,10 +50,11 @@ export const Main: React.VFC = memo(() => {
   }, [isShowSpeaker, setIsShowSpeaker]);
 
   return (
-    <div className="flex flex-col mt-5">
+    <Container>
       <Head>
         <title>トピックる</title>
       </Head>
+      <Spacer y={24} />
 
       {/*TODO: シャッフルボタン押したらスピナー表示してから表示させる*/}
       {authUser.id && isShowSpeaker && (
@@ -66,15 +69,36 @@ export const Main: React.VFC = memo(() => {
       </ShuffleLabel>
 
       {/*todo ローディング中はdisableにしたい*/}
-      <MainButton color="blue" onClickFunc={onClickShuffle}>
-        ぷっしゅ
-      </MainButton>
+      <Button
+        priority="primary"
+        type="icon_text"
+        iconType="change"
+        size="Middle"
+        text="トピック"
+        width="240px"
+        onPress={onClickShuffle}
+      />
+
       {authUser.id && (
         // ログインしていなければ非表示
-        <MainButton color="yellow" onClickFunc={switchShowSpeaker}>
-          {isShowSpeaker ? "話す人OFF" : "話す人ON"}
-        </MainButton>
+        <>
+          <Spacer y={12} />
+          <Button
+            priority="line"
+            type="icon_text"
+            iconType="user"
+            size="Middle"
+            text={isShowSpeaker ? "OFF" : "ON"}
+            width="240px"
+            onPress={switchShowSpeaker}
+          />
+        </>
       )}
-    </div>
+    </Container>
   );
 });
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
